@@ -330,67 +330,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* VEHICLE & EQUIPMENT BRANDS */}
-      <section id="brands" className="bg-[#121C19]">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-          <p className="text-xs font-bold tracking-[0.2em] text-[#18B878]">VEHICLE & EQUIPMENT BRANDS</p>
-          <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
-            Leading brands. <span className="text-[#18B878]">More choices for you.</span>
-          </h2>
-          <p className="mt-5 max-w-2xl leading-7 text-[#A8B5B0]">
-            Explore leading vehicle and construction equipment manufacturers. New and used finance options are subject to eligibility and approval.
-          </p>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              ["01","MARUTI SUZUKI","https://www.marutisuzuki.com/"],
-              ["02","HYUNDAI","https://www.hyundai.com/in/en"],
-              ["03","TATA MOTORS","https://www.tatamotors.com/"],
-              ["04","MAHINDRA","https://www.mahindra.com/"],
-              ["05","TOYOTA","https://www.toyotabharat.com/"],
-              ["06","KIA","https://www.kia.com/in/"],
-              ["07","HONDA","https://www.hondacarindia.com/"],
-              ["08","RENAULT","https://www.renault.co.in/"],
-              ["09","NISSAN","https://www.nissan.in/"],
-              ["10","VOLKSWAGEN","https://www.volkswagen.co.in/"],
-              ["11","SKODA","https://www.skoda-auto.co.in/"],
-              ["12","MG MOTOR","https://www.mgmotor.co.in/"],
-              ["13","JEEP","https://www.jeep-india.com/"],
-              ["14","CITROËN","https://www.citroen.in/"],
-              ["15","BYD","https://www.byd.com/in"],
-              ["16","ISUZU","https://www.isuzu.in/"],
-              ["17","MERCEDES-BENZ","https://www.mercedes-benz.co.in/"],
-              ["18","BMW","https://www.bmw.in/"],
-              ["19","AUDI","https://www.audi.in/"],
-              ["20","VOLVO CARS","https://www.volvocars.com/in/"],
-              ["21","LEXUS","https://www.lexusindia.co.in/"],
-              ["22","ASHOK LEYLAND","https://www.ashokleyland.com/"],
-              ["23","EICHER","https://www.eichertrucksandbuses.com/"],
-              ["24","BHARATBENZ","https://www.bharatbenz.com/"],
-              ["25","FORCE MOTORS","https://www.forcemotors.com/"],
-              ["26","JCB","https://www.jcb.com/en-in"],
-              ["27","TATA HITACHI","https://www.tatahitachi.co.in/"],
-              ["28","CATERPILLAR","https://www.cat.com/en_IN.html"],
-              ["29","KOMATSU","https://www.komatsu.com/"],
-              ["30","VOLVO CE","https://www.volvoce.com/"],
-              ["31","KOBELCO","https://www.kobelco.com/"],
-              ["32","CASE CONSTRUCTION","https://www.casece.com/"]
-            ].map(([number,name,url]) => (
-              <a key={number} href={url} target="_blank" rel="noopener noreferrer"
-                className="group rounded-2xl border border-white/[0.07] bg-[#0B1110] p-5 transition hover:-translate-y-1 hover:border-[#18B878]/40">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold tracking-[0.18em] text-[#18B878]">{number}</span>
-                  <span className="text-[#18B878]">↗</span>
-                </div>
-                <div className="mt-5 flex h-16 items-center justify-center rounded-xl border border-white/[0.06] bg-white px-4">
-                  <img src={`https://www.google.com/s2/favicons?domain=${url}&sz=128`} alt={`${name} logo`} className="h-10 w-10 object-contain" loading="lazy" />
-                </div>
-                <h3 className="mt-5 min-h-[48px] text-sm font-bold leading-6 text-[#F2F5F3]">{name}</h3>
-                <p className="mt-2 text-xs font-semibold tracking-[0.08em] text-[#A8B5B0]">OFFICIAL WEBSITE ↗</p>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
       {/* PROCESS */}
       <section id="process">
         <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
@@ -462,8 +401,6 @@ export default function Home() {
     </main>
   );
 }
-
-
 
 
 
