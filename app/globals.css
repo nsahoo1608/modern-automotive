@@ -24,3 +24,126 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* RashmiRanjan FIN - Premium Brand Animation */
+@keyframes brandColorRotate {
+  0%, 100% {
+    color: #F2F5F3;
+  }
+
+  25% {
+    color: #18B878;
+  }
+
+  50% {
+    color: #5ED9B0;
+  }
+
+  75% {
+    color: #B7EEE0;
+  }
+}
+
+.brand-name {
+  display: inline-block;
+  animation: brandColorRotate 5s ease-in-out infinite;
+}
+
+.brand-fin {
+  margin-left: 6px;
+  color: #18B878;
+  font-weight: 700;
+}
+
+/* =========================================================
+   RASHMIRANJAN FIN - PREMIUM BRAND
+   ========================================================= */
+
+.brand-logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 270px;
+  height: 58px;
+  text-decoration: none;
+}
+
+.brand-mark {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  margin-right: 9px;
+  border: 2px solid #18B878;
+  border-radius: 12px 12px 12px 3px;
+  color: #F2F5F3;
+  font-size: 32px;
+  font-weight: 900;
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: -0.08em;
+  box-shadow:
+    3px 3px 0 rgba(239, 126, 50, 0.85),
+    0 0 24px rgba(24, 184, 120, 0.12);
+  transition: all 0.3s ease;
+}
+
+.brand-logo:hover .brand-mark {
+  transform: translateY(-1px);
+  border-color: #20C986;
+  box-shadow:
+    4px 4px 0 rgba(239, 126, 50, 0.9),
+    0 0 30px rgba(24, 184, 120, 0.2);
+}
+
+.brand-word {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 0.9;
+}
+
+.brand-ashmi {
+  color: #F2F5F3;
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.brand-anjan {
+  margin-top: 4px;
+  color: #18B878;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.brand-services {
+  position: absolute;
+  left: 59px;
+  bottom: -1px;
+  color: #A8B5B0;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  white-space: nowrap;
+}
+
+.brand-dot {
+  margin: 0 4px;
+  color: #EF7E32;
+}
+
+@media (max-width: 640px) {
+  .brand-logo {
+    min-width: 205px;
+    transform: scale(0.82);
+    transform-origin: left center;
+  }
+
+  .brand-services {
+    font-size: 6px;
+  }
+}
