@@ -29,7 +29,7 @@ export default function Home() {
       <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-[#0B1110]/95 backdrop-blur-xl">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
           <a href="#" className="text-lg font-bold tracking-[0.18em]">
-            <span className="brand-name">RashmiRanjan</span><span className="brand-fin">FIN</span>
+            <span className="brand-name">RASHMI RANJAN</span><span className="brand-fin">FIN</span>
           </a>
 
           <nav className="hidden items-center gap-8 text-sm text-[#A8B5B0] md:flex">
@@ -270,6 +270,66 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FINANCE PARTNERS */}
+      <section id="partners" className="bg-[#0B1110]">
+        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+          <p className="text-xs font-bold tracking-[0.2em] text-[#18B878]">
+            FINANCE PARTNERS
+          </p>
+
+          <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
+            Trusted finance support.
+          </h2>
+
+          <p className="mt-5 max-w-2xl text-base leading-7 text-[#A8B5B0]">
+            We work with established financial institutions to help you explore
+            suitable finance options for vehicles and construction equipment,
+            subject to eligibility, terms and approval.
+          </p>
+
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              ["01", "HDB FINANCIAL SERVICES LTD", "https://www.hdbfs.com/"],
+              ["02", "HERO FINCORP LTD", "https://www.herofincorp.com/"],
+              ["03", "POONAWALLA FINCORP LTD", "https://poonawallafincorp.com/"],
+              ["04", "PIRAMAL FINCORP LTD", "https://www.piramalfinance.com/"],
+              ["05", "MAHINDRA & MAHINDRA FINANCIAL SERVICES LTD", "https://www.mahindrafinance.com/"],
+              ["06", "CHOLAMANDALAM INVESTMENT AND FINANCIAL SERVICES LTD", "https://www.cholamandalam.com/"],
+              ["07", "ARKA FINCORP LTD", "https://www.arkafincap.com/"],
+              ["08", "SURYODAYA SMALL FINANCE BANK LTD", "https://suryoday.bank.in/"],
+              ["09", "INDUSIND BANK LTD", "https://www.indusind.bank.in/"],
+              ["10", "HINDUJA FINANCIAL SERVICES LTD", "https://www.hindujaleylandfinance.com/"],
+              ["11", "SUNDARAM FINANCE LTD", "https://sundaramfinance.in/"],
+              ["12", "KOTAK MAHINDRA BANK", "https://www.kotak.com/"],
+            ].map(([number, name, url]) => (
+              <a
+                key={number}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group rounded-2xl border border-white/[0.08] bg-[#121C19] p-6 transition hover:-translate-y-1 hover:border-[#18B878]/40"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <span className="text-xs font-bold tracking-[0.18em] text-[#18B878]">
+                    {number}
+                  </span>
+                  <span className="text-[#18B878] transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">
+                    ↗
+                  </span>
+                </div>
+
+                <h3 className="mt-8 min-h-[56px] text-lg font-bold leading-7 text-[#F2F5F3]">
+                  {name}
+                </h3>
+
+                <p className="mt-4 text-sm leading-6 text-[#A8B5B0]">
+                  Official finance partner website ↗
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
       {/* PROCESS */}
       <section id="process">
         <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
@@ -330,15 +390,18 @@ export default function Home() {
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-10 text-sm text-[#A8B5B0] md:flex-row md:items-center md:justify-between lg:px-8">
           <div>
             <p className="font-bold tracking-[0.15em] text-[#F2F5F3]">
-              <span className="brand-name">RashmiRanjan</span><span className="brand-fin">FIN</span>
+              <span className="brand-name">RASHMI RANJAN</span><span className="brand-fin">FIN</span>
             </p>
             <p className="mt-1">Smart vehicle finance, made simpler.</p>
           </div>
 
-          <p>© 2026 RashmiRanjan FIN. All rights reserved.</p>
+          <p>© 2026 RASHMI RANJAN FIN. All rights reserved.</p>
         </div>
       </footer>
     </main>
   );
 }
+
+
+
 
