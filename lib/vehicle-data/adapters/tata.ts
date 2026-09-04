@@ -1,4 +1,4 @@
-﻿import type {
+import type {
   VehicleManufacturer,
   VehicleModel,
   VehicleVariant,
@@ -32,6 +32,20 @@ const IMAGES = {
   goldPetrol:
     "https://smalltrucks.tatamotors.com/assets/smalltrucks/files/2026-09/ACE%20Gold%20Petrol%20-%20Right%203.4_0.png?VersionId=xJFL4q9xw_NuY20iZCxYKZ0cPJIIoxPZ",
 
+  intraV40:
+    "https://smalltrucks.tatamotors.com/assets/smalltrucks/files/2026-06/V40%20Right-%203-4%20Angle%20-%20With%20Natural%20Background%202.png?VersionId=biKMGc1HMc_KHoHJULqFuyJC_azsokdV",
+
+  intraV20:
+    "https://smalltrucks.tatamotors.com/assets/smalltrucks/files/2026-03/Intra%20V20%20-%20Left%20-%201x1%201.webp?VersionId=lfOccWCFvmielhwu_14hRK.DpxfN02dl",
+
+  intraV70Gold:
+    "https://smalltrucks.tatamotors.com/assets/smalltrucks/files/2026-03/Intra%20V70%20Gold%20-%20Left%20-%201x1%201.webp?VersionId=v60XgEaZiOY4sBu3wmgAtFtWYJG0C4ZQ",
+
+  intraV50Gold:
+    "https://smalltrucks.tatamotors.com/assets/smalltrucks/files/2026-03/Intra%20V50%20Gold%20-%20Left%20-%201x1%201.webp?VersionId=ZSFT8QniDflwDNmwReJJTH_eIqFLhr2Q",
+
+  intraV30Gold:
+    "https://smalltrucks.tatamotors.com/assets/smalltrucks/files/2026-03/Intra%20V30%20Gold%20-%20Left%20-%201x1%201.webp?VersionId=uZQRaW3dlanBvTLH2CL6AoYLyZxAMMW0",
   goldCng:
     "https://smalltrucks.tatamotors.com/assets/smalltrucks/files/2025-01/Brochure_0_0.png?VersionId=KScjUTYZfQkQn4WOhITxxabXBYOwcWzw",
 };
@@ -70,6 +84,66 @@ function aceModel(
 
 export async function fetchTataCommercial(): Promise<VehicleManufacturer> {
   const models: VehicleModel[] = [
+    aceModel(
+      "Tata Intra V40",
+      IMAGES.intraV40,
+      "Diesel",
+      {
+        Engine: "1497 cc",
+        Power: "59.5 kW (80 hp)",
+        Torque: "285 Nm",
+        "Wheelbase": "2450 mm",
+      }
+    ),
+
+    aceModel(
+      "Tata Intra V20",
+      IMAGES.intraV20,
+      "Diesel",
+      {
+        Engine: "1196 cc",
+        Power: "59.5 kW (80 hp)",
+        Torque: "190 Nm",
+        "Wheelbase": "2450 mm",
+      }
+    ),
+
+    aceModel(
+      "Tata Intra V70 Gold",
+      IMAGES.intraV70Gold,
+      "Diesel",
+      {
+        Engine: "1496 cc",
+        Power: "52 kW (70 hp)",
+        Torque: "160 Nm",
+        "Wheelbase": "2450 mm",
+      }
+    ),
+
+    aceModel(
+      "Tata Intra V50 Gold",
+      IMAGES.intraV50Gold,
+      "Diesel",
+      {
+        Engine: "1496 cc",
+        Power: "52 kW (70 hp)",
+        Torque: "160 Nm",
+        "Wheelbase": "2450 mm",
+      }
+    ),
+
+    aceModel(
+      "Tata Intra V30 Gold",
+      IMAGES.intraV30Gold,
+      "Diesel",
+      {
+        Engine: "1496 cc",
+        Power: "52 kW (70 hp)",
+        Torque: "140 Nm",
+        "Wheelbase": "2250 mm",
+      }
+    ),
+
     aceModel(
       "Tata Ace Gold Plus XL",
       IMAGES.goldPlusXL,
@@ -201,3 +275,6 @@ export async function fetchTataCommercial(): Promise<VehicleManufacturer> {
     ],
   };
 }
+
+
+

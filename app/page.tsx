@@ -96,11 +96,19 @@ export default function Page() {
           background: "#080d0c",
         }}
       >
-        <div style={{ fontWeight: 900, letterSpacing: 2, fontSize: 18 }}>
-          <span style={{ color: "#f2f5f3" }}>RASHMI RANJAN</span>{" "}
-          <span style={{ color: "#18b878" }}>FIN</span>{" "}
-          <span style={{ color: "#d98b3a" }}>SOLUTION</span>
-        </div>
+        <a href="/" style={{ display: "flex", alignItems: "center" }}>
+          <img
+            src="/images/logo.jpeg"
+            alt="Rashmi Ranjan Fin Solution"
+            style={{
+              height: 60,
+              width: "auto",
+              objectFit: "contain",
+              display: "block",
+              borderRadius: 12,
+            }}
+          />
+        </a>
 
         <div style={{ display: "flex", gap: 28, fontSize: 13 }}>
           <a href="/apply" style={{ color: "#aaa", textDecoration: "none" }}>
@@ -159,8 +167,7 @@ export default function Page() {
               maxWidth: 650,
             }}
           >
-            New and used vehicle finance solutions for cars, SUVs, commercial
-            vehicles and construction equipment — all under one roof.
+            New and used vehicle finance solutions for cars, SUVs, commercial vehicles and construction equipment — all under one roof.
           </p>
 
           <div style={{ display: "flex", gap: 14, marginTop: 28, flexWrap: "wrap" }}>
@@ -351,7 +358,8 @@ export default function Page() {
           >
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
               <div>
-                <label style={{ display: "block", color: "#a8b5b0", marginBottom: 8 }}>
+                <label style={{ display: "block",
+              borderRadius: 12, color: "#a8b5b0", marginBottom: 8 }}>
                   Vehicle Price
                 </label>
                 <input
@@ -364,7 +372,8 @@ export default function Page() {
               </div>
 
               <div>
-                <label style={{ display: "block", color: "#a8b5b0", marginBottom: 8 }}>
+                <label style={{ display: "block",
+              borderRadius: 12, color: "#a8b5b0", marginBottom: 8 }}>
                   Down Payment
                 </label>
                 <input
@@ -378,7 +387,8 @@ export default function Page() {
               </div>
 
               <div>
-                <label style={{ display: "block", color: "#a8b5b0", marginBottom: 8 }}>
+                <label style={{ display: "block",
+              borderRadius: 12, color: "#a8b5b0", marginBottom: 8 }}>
                   Interest Rate (%)
                 </label>
                 <input
@@ -392,7 +402,8 @@ export default function Page() {
               </div>
 
               <div>
-                <label style={{ display: "block", color: "#a8b5b0", marginBottom: 8 }}>
+                <label style={{ display: "block",
+              borderRadius: 12, color: "#a8b5b0", marginBottom: 8 }}>
                   Tenure (Years)
                 </label>
                 <input
@@ -418,14 +429,16 @@ export default function Page() {
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
                 <div>
                   <small style={{ color: "#a8b5b0" }}>Loan Amount</small>
-                  <strong style={{ display: "block", marginTop: 6, fontSize: 24 }}>
+                  <strong style={{ display: "block",
+              borderRadius: 12, marginTop: 6, fontSize: 24 }}>
                     {formatINR(loanAmount)}
                   </strong>
                 </div>
 
                 <div>
                   <small style={{ color: "#a8b5b0" }}>Estimated Monthly EMI</small>
-                  <strong style={{ display: "block", marginTop: 6, fontSize: 28, color: "#18b878" }}>
+                  <strong style={{ display: "block",
+              borderRadius: 12, marginTop: 6, fontSize: 28, color: "#18b878" }}>
                     {formatINR(emi)}
                   </strong>
                 </div>
@@ -511,8 +524,7 @@ export default function Page() {
           textAlign: "center",
           fontSize: 13,
         }}
-      >
-        © 2026 RASHMI RANJAN FIN SOLUTION. All rights reserved.
+      >© 2026 RASHMI RANJAN FIN SOLUTION. All rights reserved.
       </footer>
     </main>
   );
