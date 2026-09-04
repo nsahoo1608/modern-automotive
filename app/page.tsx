@@ -1,6 +1,28 @@
 "use client";
 
+import { useState } from "react";
+
 export default function Page() {
+  const [vehiclePrice, setVehiclePrice] = useState(800000);
+  const [downPayment, setDownPayment] = useState(200000);
+  const [interestRate, setInterestRate] = useState(10);
+  const [tenureYears, setTenureYears] = useState(5);
+
+  const loanAmount = Math.max(vehiclePrice - downPayment, 0);
+  const monthlyRate = interestRate / 12 / 100;
+  const totalMonths = tenureYears * 12;
+
+  const emi =
+    loanAmount === 0
+      ? 0
+      : monthlyRate === 0
+        ? loanAmount / totalMonths
+        : (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) /
+          (Math.pow(1 + monthlyRate, totalMonths) - 1);
+
+  const formatINR = (value: number) =>
+    "Rs. " + Math.round(value).toLocaleString("en-IN");
+
   const brands = [
     "MARUTI SUZUKI",
     "HYUNDAI",
@@ -310,8 +332,12 @@ export default function Page() {
           </div>
 
           <h2 style={{ fontSize: 42, marginTop: 12, fontWeight: 900 }}>
-            Finance built around your vehicle.
+            Vehicle EMI Calculator
           </h2>
+
+          <p style={{ color: "#a8b5b0", marginTop: 10, maxWidth: 650 }}>
+            Calculate your estimated monthly vehicle loan EMI based on price, down payment, interest rate and tenure.
+          </p>
 
           <div
             style={{
@@ -320,34 +346,107 @@ export default function Page() {
               border: "1px solid #263630",
               borderRadius: 20,
               padding: 30,
-              maxWidth: 620,
+              maxWidth: 760,
             }}
           >
-            <div style={{ color: "#a8b5b0" }}>Example Vehicle Price</div>
-            <div style={{ fontSize: 38, fontWeight: 900, marginTop: 8 }}>₹8,00,000</div>
-
-            <div style={{ marginTop: 25, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 15 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
               <div>
-                <small style={{ color: "#a8b5b0" }}>Down Payment</small>
-                <strong style={{ display: "block", marginTop: 5 }}>₹2,00,000</strong>
+                <label style={{ display: "block", color: "#a8b5b0", marginBottom: 8 }}>
+                  Vehicle Price
+                </label>
+                <input
+                  type="number"
+                  min="0"
+                  value={vehiclePrice}
+                  onChange={(e) => setVehiclePrice(Number(e.target.value) || 0)}
+                  style={{ width: "100%", padding: 14, borderRadius: 10, border: "1px solid #263630", background: "#121c19", color: "#f2f5f3", fontSize: 16 }}
+                />
               </div>
 
               <div>
-                <small style={{ color: "#a8b5b0" }}>Loan Amount</small>
-                <strong style={{ display: "block", marginTop: 5 }}>₹6,00,000</strong>
+                <label style={{ display: "block", color: "#a8b5b0", marginBottom: 8 }}>
+                  Down Payment
+                </label>
+                <input
+                  type="number"
+                  min="0"
+                  max={vehiclePrice}
+                  value={downPayment}
+                  onChange={(e) => setDownPayment(Math.min(Number(e.target.value) || 0, vehiclePrice))}
+                  style={{ width: "100%", padding: 14, borderRadius: 10, border: "1px solid #263630", background: "#121c19", color: "#f2f5f3", fontSize: 16 }}
+                />
               </div>
 
               <div>
-                <small style={{ color: "#a8b5b0" }}>Tenure</small>
-                <strong style={{ display: "block", marginTop: 5 }}>5 Years</strong>
+                <label style={{ display: "block", color: "#a8b5b0", marginBottom: 8 }}>
+                  Interest Rate (%)
+                </label>
+                <input
+                  type="number"
+                  min="0"
+                  step="0.1"
+                  value={interestRate}
+                  onChange={(e) => setInterestRate(Number(e.target.value) || 0)}
+                  style={{ width: "100%", padding: 14, borderRadius: 10, border: "1px solid #263630", background: "#121c19", color: "#f2f5f3", fontSize: 16 }}
+                />
               </div>
 
               <div>
-                <small style={{ color: "#a8b5b0" }}>Estimated EMI</small>
-                <strong style={{ display: "block", marginTop: 5, color: "#18b878" }}>
-                  ₹12,450
-                </strong>
+                <label style={{ display: "block", color: "#a8b5b0", marginBottom: 8 }}>
+                  Tenure (Years)
+                </label>
+                <input
+                  type="number"
+                  min="1"
+                  max="15"
+                  value={tenureYears}
+                  onChange={(e) => setTenureYears(Math.max(1, Number(e.target.value) || 1))}
+                  style={{ width: "100%", padding: 14, borderRadius: 10, border: "1px solid #263630", background: "#121c19", color: "#f2f5f3", fontSize: 16 }}
+                />
               </div>
+            </div>
+
+            <div
+              style={{
+                marginTop: 25,
+                padding: 24,
+                borderRadius: 14,
+                background: "#121c19",
+                border: "1px solid #263630",
+              }}
+            >
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+                <div>
+                  <small style={{ color: "#a8b5b0" }}>Loan Amount</small>
+                  <strong style={{ display: "block", marginTop: 6, fontSize: 24 }}>
+                    {formatINR(loanAmount)}
+                  </strong>
+                </div>
+
+                <div>
+                  <small style={{ color: "#a8b5b0" }}>Estimated Monthly EMI</small>
+                  <strong style={{ display: "block", marginTop: 6, fontSize: 28, color: "#18b878" }}>
+                    {formatINR(emi)}
+                  </strong>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ marginTop: 25 }}>
+              <a
+                href="/apply"
+                style={{
+                  display: "inline-block",
+                  padding: "14px 24px",
+                  borderRadius: 10,
+                  background: "#18b878",
+                  color: "#06100c",
+                  fontWeight: 800,
+                  textDecoration: "none",
+                }}
+              >
+                Apply for Finance
+              </a>
             </div>
           </div>
         </div>

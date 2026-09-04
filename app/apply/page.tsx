@@ -16,7 +16,7 @@ const inputStyle = {
 };
 
 export default function ApplyPage() {
-  const [form, setForm] = useState({ name: "", mobile: "", city: "", state: "", category: "", condition: "", price: "", loan: "", message: "", latitude: "", longitude: "", address: "", village: "", ward: "", policeStation: "", panchayat: "", nac: "", municipality: "", district: "", pincode: "" });
+  const [form, setForm] = useState({ name: "", mobile: "", email: "", city: "", state: "", category: "", condition: "", price: "", loan: "", message: "", latitude: "", longitude: "", address: "", village: "", ward: "", policeStation: "", panchayat: "", nac: "", municipality: "", district: "", pincode: "" });
 
   const captureLocation = () => {
     if (!navigator.geolocation) {
@@ -78,6 +78,65 @@ export default function ApplyPage() {
   const updateField = (field: keyof typeof form, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
+  const [submitting, setSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState("");
+
+  const handleSubmit = async () => {
+    if (!form.name.trim() || form.mobile.length !== 10) {
+      alert("Please enter your full name and a valid 10-digit mobile number.");
+      return;
+    }
+
+    setSubmitting(true);
+    setSubmitMessage("");
+
+    try {
+      const response = await fetch("/api/finance-application", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Unable to submit application.");
+      }
+
+      setSubmitMessage("Application submitted successfully. Our finance team will contact you shortly.");
+      setForm({
+        name: "",
+        mobile: "",
+        email: "",
+        city: "",
+        state: "",
+        category: "",
+        condition: "",
+        price: "",
+        loan: "",
+        message: "",
+        latitude: "",
+        longitude: "",
+        address: "",
+        village: "",
+        ward: "",
+        policeStation: "",
+        panchayat: "",
+        nac: "",
+        municipality: "",
+        district: "",
+        pincode: "",
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Something went wrong.";
+      setSubmitMessage(message);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <main
       style={{
@@ -304,6 +363,21 @@ export default function ApplyPage() {
               </div>
             </label>
 
+            {/* EMAIL */}
+            <label style={{ display: "grid", gap: 8 }}>
+              <span style={{ fontSize: 13, fontWeight: 800 }}>
+                Email Address
+              </span>
+
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                value={form.email}
+                onChange={(e) => updateField("email", e.target.value)}
+                style={inputStyle}
+              />
+            </label>
+
             {/* CITY */}
             <label style={{ display: "grid", gap: 8 }}>
               <span style={{ fontSize: 13, fontWeight: 800 }}>
@@ -500,7 +574,9 @@ export default function ApplyPage() {
 
               <input
                 type="number"
-                placeholder="₹ Enter amount"
+                placeholder="Enter amount"
+                value={form.price}
+                onChange={(e) => updateField("price", e.target.value)}
                 style={inputStyle}
               />
             </label>
@@ -513,10 +589,13 @@ export default function ApplyPage() {
 
               <input
                 type="number"
-                placeholder="₹ Enter amount"
+                placeholder="Enter amount"
+                value={form.loan}
+                onChange={(e) => updateField("loan", e.target.value)}
                 style={inputStyle}
               />
             </label>
+
           </div>
 
           {/* MESSAGE */}
@@ -534,6 +613,8 @@ export default function ApplyPage() {
             <textarea
               placeholder="Tell us about the vehicle, showroom or finance requirement..."
               rows={5}
+              value={form.message}
+              onChange={(e) => updateField("message", e.target.value)}
               style={{
                 ...inputStyle,
                 resize: "vertical",
@@ -542,7 +623,8 @@ export default function ApplyPage() {
           </label>
 
           {/* SUBMIT */}
-          <button
+          <button onClick={handleSubmit}
+            disabled={submitting}
             type="button"
             style={{
               marginTop: 26,
@@ -558,8 +640,23 @@ export default function ApplyPage() {
               letterSpacing: 0.5,
             }}
           >
-            SUBMIT FINANCE REQUEST →
+            {submitting ? "SUBMITTING..." : "SUBMIT FINANCE REQUEST"}
           </button>
+
+          {submitMessage && (
+            <p
+              style={{
+                textAlign: "center",
+                color: "#18B878",
+                fontSize: 13,
+                fontWeight: 700,
+                marginTop: 16,
+              }}
+            >
+              {submitMessage}
+            </p>
+          )}
+
 
           <p
             style={{
@@ -606,6 +703,7 @@ export default function ApplyPage() {
     </main>
   );
 }
+
 
 
 
