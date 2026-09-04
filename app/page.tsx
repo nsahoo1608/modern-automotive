@@ -1,43 +1,420 @@
-﻿"use client";
-import React, { useState } from 'react';
-import { Phone, MessageCircle } from 'lucide-react';
+"use client";
+
 export default function Page() {
-  const partners = [
-    { name: "HDB FINANCIAL SERVICES LTD", link: "https://www.hdbfs.com", logo: "https://upload.wikimedia.org/wikipedia/commons/c/c5/HDB_Financial_Services_logo.svg" },
-    { name: "HERO FINCORP LTD", link: "https://www.herofincorp.com", logo: "https://upload.wikimedia.org/wikipedia/en/4/4a/Hero_FinCorp_Logo.svg" },
-    { name: "POONAWALLA FINCORP LTD", link: "https://www.poonawallafincorp.com", logo: "https://companieslogo.com/img/orig/POONAWALLA.NS_BIG-04e7a3e7.png?t=1720244490" },
-    { name: "PIRAMAL FINANCE LTD", link: "https://www.piramalfinance.com", logo: "https://www.piramalfinance.com/assets/images/logo.png" },
-    { name: "MAHINDRA FINANCE", link: "https://www.mahindrafinance.com", logo: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Mahindra-finance-logo.png" },
-    { name: "CHOLAMANDALAM INVESTMENT AND FINANCE", link: "https://www.cholamandalam.com", logo: "https://upload.wikimedia.org/wikipedia/en/7/70/Cholamandalam_Investment_and_Finance_Company.svg" },
-    { name: "ARKA FINCORP LTD", link: "https://www.arkafincap.com", logo: "https://www.arkafincap.com/o/arka-fincap-theme/images/arka-logo.png" },
-    { name: "SURYODAY SMALL FINANCE BANK", link: "https://www.suryodaybank.com", logo: "https://upload.wikimedia.org/wikipedia/commons/3/36/Suryoday_Small_Finance_Bank_logo.svg" },
-    { name: "INDUSIND BANK LTD", link: "https://www.indusind.com", logo: "https://upload.wikimedia.org/wikipedia/commons/1/12/IndusInd_Bank_SVG_Logo.svg" },
-    { name: "HINDUJA LEYLAND FINANCE", link: "https://www.hindujaleylandfinance.com", logo: "https://logo.clearbit.com/hindujaleylandfinance.com" },
-    { name: "SUNDARAM FINANCE LTD", link: "https://www.sundaramfinance.in", logo: "https://www.sundaramfinance.in/images/sf-logo.svg" },
-    { name: "KOTAK MAHINDRA BANK", link: "https://www.kotak.com", logo: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Kotak_Mahindra_Bank_logo.svg" },
+  const brands = [
+    "MARUTI SUZUKI",
+    "HYUNDAI",
+    "TATA MOTORS",
+    "MAHINDRA",
+    "TOYOTA",
+    "KIA",
+    "HONDA",
+    "RENAULT",
+    "NISSAN",
+    "VOLKSWAGEN",
+    "SKODA",
+    "MG MOTOR",
+    "JEEP",
+    "CITROËN",
+    "BYD",
+    "ISUZU",
+    "MERCEDES-BENZ",
+    "BMW",
+    "AUDI",
+    "VOLVO",
+    "LEXUS",
+    "ASHOK LEYLAND",
+    "EICHER",
+    "BHARATBENZ",
+    "FORCE MOTORS",
+    "JCB",
+    "TATA HITACHI",
+    "CATERPILLAR",
+    "KOMATSU",
+    "VOLVO CE",
+    "KOBELCO",
+    "CASE CONSTRUCTION",
+    "JAGUAR",
+    "LAND ROVER",
   ];
+
+  const banks = [
+    ["HDB FINANCIAL SERVICES LTD", "https://www.hdbfs.com"],
+    ["HERO FINCORP LTD", "https://www.herofincorp.com"],
+    ["POONAWALLA FINCORP LTD", "https://www.poonawallafincorp.com"],
+    ["PIRAMAL FINANCE", "https://www.piramalfinance.com"],
+    ["MAHINDRA FINANCE", "https://www.mahindrafinance.com"],
+    ["CHOLAMANDALAM FINANCE", "https://www.cholamandalam.com"],
+    ["ARKA FINCORP LTD", "https://www.arkafincap.com"],
+    ["SURYODAY BANK", "https://www.suryodaybank.com"],
+    ["INDUSIND BANK LTD", "https://www.indusind.com"],
+    ["HINDUJA LEYLAND FINANCE", "https://www.hindujaleylandfinance.com"],
+    ["SUNDARAM FINANCE LTD", "https://www.sundaramfinance.in"],
+    ["KOTAK MAHINDRA BANK", "https://www.kotak.com"],
+  ];
+
   return (
-    <div className="min-h-screen bg-[#080b12] text-white font-sans">
-      <header className="bg-black border-b border-white/[0.06] h- flex items-center"><div className="max-w- mx-auto px-4 md:px-6 w-full flex items-center justify-between"><div className="flex items-center gap-3"><div className="w-9 h-9 bg-[#e11d2d] rounded- flex items-center justify-center font-black">R</div><div className="font-black text-"><span className="text-[#e11d2d]">R</span> RASMHI RANJAN</div></div><a href="https://wa.me/919437123456" className="text- flex items-center gap-2"><MessageCircle className="w-4 h-4 text-green-500" /> WhatsApp</a></div></header>
-      <section className="bg-[#f6f7f9] py-12">
-        <div className="max-w- mx-auto px-4 md:px-6">
-          <div className="text-center"><h2 className="text-black font-black text- tracking-[0.1em]">OUR BANKING PARTNERS</h2><p className="text-black/50 text- mt-2">12+ Trusted Banks & NBFCs - Click to visit official website</p><div className="mt-3 w-20 h- bg-[#e11d2d] mx-auto rounded-full" /></div>
-          <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-            {partners.map((p,i)=>(
-              <a key={i} href={p.link} target="_blank" rel="noopener" className="group bg-white border border-black/[0.08] rounded- p-6 flex flex-col items-center justify-center text-center min-h- shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] hover:-translate-y- hover:border-[#e11d2d]/30 transition-all duration-300">
-                <div className="w- h- flex items-center justify-center mb-4">
-                  <img src={p.logo} alt={p.name} className="max-w-full max-h-full object-contain" />
-                </div>
-                <span className="text- font-extrabold leading-[1.3] tracking-[0.03em] text-black/70 group-hover:text-black">{p.name}</span>
-                <span className="mt-2 text- font-bold tracking-[0.15em] text-[#e11d2d] opacity-0 group-hover:opacity-100 transition-opacity">VISIT →</span>
-              </a>
-            ))}
+    <main
+      style={{
+        background: "#0b1110",
+        color: "#f2f5f3",
+        minHeight: "100vh",
+        fontFamily: "Arial, sans-serif",
+      }}
+    >
+      {/* NAVBAR */}
+      <nav
+        style={{
+          height: 72,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "0 6%",
+          borderBottom: "1px solid #1d2925",
+          background: "#080d0c",
+        }}
+      >
+        <div style={{ fontWeight: 900, letterSpacing: 2, fontSize: 18 }}>
+          <span style={{ color: "#f2f5f3" }}>RASHMI RANJAN</span>{" "}
+          <span style={{ color: "#18b878" }}>FIN</span>{" "}
+          <span style={{ color: "#d98b3a" }}>SOLUTION</span>
+        </div>
+
+        <div style={{ display: "flex", gap: 28, fontSize: 13 }}>
+          <a href="/apply" style={{ color: "#aaa", textDecoration: "none" }}>
+            Finance
+          </a>
+          <a href="#vehicles" style={{ color: "#aaa", textDecoration: "none" }}>
+            Vehicles
+          </a>
+          <a href="#brands" style={{ color: "#aaa", textDecoration: "none" }}>
+            Brands
+          </a>
+          <a href="#partners" style={{ color: "#aaa", textDecoration: "none" }}>
+            Partners
+          </a>
+        </div>
+      </nav>
+
+      {/* HERO */}
+      <section
+        style={{
+          maxWidth: 1280,
+          margin: "0 auto",
+          padding: "90px 6% 55px",
+        }}
+      >
+        <div style={{ maxWidth: 850 }}>
+          <div
+            style={{
+              color: "#18b878",
+              fontSize: 12,
+              fontWeight: 800,
+              letterSpacing: 3,
+            }}
+          >
+            NEW & USED VEHICLE FINANCE
           </div>
-          <div className="mt-10 text-center"><p className="text- text-black/40">* All logos are trademarks of their respective owners. Clicking will redirect to official website.</p></div>
+
+          <h1
+            style={{
+              fontSize: "clamp(44px, 7vw, 82px)",
+              lineHeight: 0.95,
+              margin: "18px 0",
+              fontWeight: 900,
+            }}
+          >
+            DRIVE YOUR DREAM.
+            <br />
+            <span style={{ color: "#18b878" }}>FINANCE</span> MADE SIMPLE.
+          </h1>
+
+          <p
+            style={{
+              color: "#a8b5b0",
+              fontSize: 18,
+              lineHeight: 1.7,
+              maxWidth: 650,
+            }}
+          >
+            New and used vehicle finance solutions for cars, SUVs, commercial
+            vehicles and construction equipment — all under one roof.
+          </p>
+
+          <div style={{ display: "flex", gap: 14, marginTop: 28, flexWrap: "wrap" }}>
+            <a
+              href="/apply"
+              style={{
+                background: "#18b878",
+                color: "white",
+                padding: "15px 24px",
+                borderRadius: 10,
+                textDecoration: "none",
+                fontWeight: 800,
+              }}
+            >
+              Calculate EMI
+            </a>
+
+            <a
+              href="#vehicles"
+              style={{
+                border: "1px solid #34433e",
+                color: "#f2f5f3",
+                padding: "15px 24px",
+                borderRadius: 10,
+                textDecoration: "none",
+                fontWeight: 800,
+              }}
+            >
+              Explore Vehicles
+            </a>
+          </div>
         </div>
       </section>
-      <footer className="bg-black py-6"><div className="max-w- mx-auto px-4 md:px-6 flex justify-between text- text-white/30"><span>© 2025 RASMHI RANJAN Vehicle Finance</span><span>12+ Banking Partners</span></div></footer>
-      <a href="https://wa.me/919437123456" target="_blank" className="fixed bottom-5 right-5 w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center shadow-xl"><MessageCircle className="w-7 h-7 text-white" /></a>
-    </div>
+
+      {/* SCROLLING BRANDS */}
+      <section
+        id="brands"
+        style={{
+          overflow: "hidden",
+          borderTop: "1px solid #1d2925",
+          borderBottom: "1px solid #1d2925",
+          background: "#121c19",
+          padding: "24px 0",
+        }}
+      >
+        <div
+          style={{
+            color: "#18b878",
+            textAlign: "center",
+            fontSize: 11,
+            fontWeight: 800,
+            letterSpacing: 3,
+            marginBottom: 18,
+          }}
+        >
+          VEHICLE & EQUIPMENT BRANDS
+        </div>
+
+        <div className="brand-marquee">
+          <div className="brand-track">
+            {[...brands, ...brands].map((brand, index) => (
+              <div className="brand-item" key={`${brand}-${index}`}>
+                <span className="brand-dot" />
+                {brand}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <style jsx>{`
+          .brand-marquee {
+            overflow: hidden;
+            width: 100%;
+          }
+
+          .brand-track {
+            display: flex;
+            width: max-content;
+            animation: scrollBrands 55s linear infinite;
+          }
+
+          .brand-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+            margin-right: 48px;
+            color: #f2f5f3;
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+          }
+
+          .brand-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #18b878;
+            display: inline-block;
+          }
+
+          @keyframes scrollBrands {
+            from {
+              transform: translateX(0);
+            }
+            to {
+              transform: translateX(-50%);
+            }
+          }
+
+          .brand-marquee:hover .brand-track {
+            animation-play-state: paused;
+          }
+        `}</style>
+      </section>
+
+      {/* VEHICLES */}
+      <section id="vehicles" style={{ maxWidth: 1280, margin: "0 auto", padding: "80px 6%" }}>
+        <div style={{ color: "#18b878", fontSize: 12, fontWeight: 800, letterSpacing: 3 }}>
+          VEHICLES
+        </div>
+
+        <h2 style={{ fontSize: 42, marginTop: 12, fontWeight: 900 }}>
+          New & Used Vehicles
+        </h2>
+
+        <p style={{ color: "#a8b5b0", maxWidth: 650, lineHeight: 1.7 }}>
+          Compare vehicle prices, categories and finance options. Explore
+          quality used vehicles with photos, videos and 360° views where
+          available.
+        </p>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
+            gap: 16,
+            marginTop: 35,
+          }}
+        >
+          {[
+            ["01", "Private Cars", "New & Used"],
+            ["02", "SUV & Premium", "New & Used"],
+            ["03", "Commercial Vehicles", "New & Used"],
+            ["04", "Construction Equipment", "New & Used"],
+          ].map(([no, title, text]) => (
+            <div
+              key={no}
+              style={{
+                background: "#121c19",
+                border: "1px solid #263630",
+                borderRadius: 18,
+                padding: 26,
+              }}
+            >
+              <div style={{ color: "#18b878", fontWeight: 900 }}>{no}</div>
+              <h3 style={{ marginTop: 30, fontSize: 20 }}>{title}</h3>
+              <p style={{ color: "#a8b5b0", marginTop: 8 }}>{text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* FINANCE */}
+      <section id="finance" style={{ background: "#121c19", padding: "80px 6%" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+          <div style={{ color: "#18b878", fontSize: 12, fontWeight: 800, letterSpacing: 3 }}>
+            FINANCE
+          </div>
+
+          <h2 style={{ fontSize: 42, marginTop: 12, fontWeight: 900 }}>
+            Finance built around your vehicle.
+          </h2>
+
+          <div
+            style={{
+              marginTop: 35,
+              background: "#0b1110",
+              border: "1px solid #263630",
+              borderRadius: 20,
+              padding: 30,
+              maxWidth: 620,
+            }}
+          >
+            <div style={{ color: "#a8b5b0" }}>Example Vehicle Price</div>
+            <div style={{ fontSize: 38, fontWeight: 900, marginTop: 8 }}>₹8,00,000</div>
+
+            <div style={{ marginTop: 25, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 15 }}>
+              <div>
+                <small style={{ color: "#a8b5b0" }}>Down Payment</small>
+                <strong style={{ display: "block", marginTop: 5 }}>₹2,00,000</strong>
+              </div>
+
+              <div>
+                <small style={{ color: "#a8b5b0" }}>Loan Amount</small>
+                <strong style={{ display: "block", marginTop: 5 }}>₹6,00,000</strong>
+              </div>
+
+              <div>
+                <small style={{ color: "#a8b5b0" }}>Tenure</small>
+                <strong style={{ display: "block", marginTop: 5 }}>5 Years</strong>
+              </div>
+
+              <div>
+                <small style={{ color: "#a8b5b0" }}>Estimated EMI</small>
+                <strong style={{ display: "block", marginTop: 5, color: "#18b878" }}>
+                  ₹12,450
+                </strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FINANCE PARTNERS */}
+      <section id="partners" style={{ maxWidth: 1280, margin: "0 auto", padding: "80px 6%" }}>
+        <div style={{ color: "#18b878", fontSize: 12, fontWeight: 800, letterSpacing: 3 }}>
+          FINANCE PARTNERS
+        </div>
+
+        <h2 style={{ fontSize: 42, marginTop: 12, fontWeight: 900 }}>
+          Multiple finance options.
+        </h2>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit,minmax(230px,1fr))",
+            gap: 15,
+            marginTop: 35,
+          }}
+        >
+          {banks.map(([name, url]) => (
+            <a
+              key={name}
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                background: "#121c19",
+                border: "1px solid #263630",
+                borderRadius: 16,
+                padding: 22,
+                color: "#f2f5f3",
+                textDecoration: "none",
+                minHeight: 120,
+              }}
+            >
+              <div style={{ color: "#18b878", fontSize: 12, fontWeight: 900 }}>
+                FINANCE PARTNER
+              </div>
+
+              <div style={{ marginTop: 18, fontWeight: 800, lineHeight: 1.5 }}>
+                {name}
+              </div>
+
+              <div style={{ marginTop: 10, color: "#a8b5b0", fontSize: 12 }}>
+                Official Website ↗
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer
+        style={{
+          borderTop: "1px solid #263630",
+          padding: "35px 6%",
+          color: "#a8b5b0",
+          textAlign: "center",
+          fontSize: 13,
+        }}
+      >
+        © 2026 RASHMI RANJAN FIN SOLUTION. All rights reserved.
+      </footer>
+    </main>
   );
 }
