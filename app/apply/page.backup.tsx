@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-
 
 const inputStyle = {
   width: "100%",
@@ -17,58 +16,7 @@ const inputStyle = {
 };
 
 export default function ApplyPage() {
-  const [vehicles, setVehicles] = useState<any[]>([]);
-  const [selectedVehicleType, setSelectedVehicleType] = useState("");
-  const [selectedBrand, setSelectedBrand] = useState("");
-  const [selectedModel, setSelectedModel] = useState("");
-  const [selectedVariant, setSelectedVariant] = useState("");
-
-  useEffect(() => {
-    fetch("/api/vehicles")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          console.log("VEHICLE API DATA:", data.manufacturers);
-          setVehicles(data.manufacturers ?? []);
-        }
-      })
-      .catch(console.error);
-  }, []);
-
-  const categories = [
-    "Commercial Vehicle",
-    "Passenger Vehicle",
-    "Electric Vehicle",
-    "Two Wheeler",
-  ];
-
-  console.log("VEHICLES STATE:", vehicles);
-  console.log("SELECTED TYPE:", selectedVehicleType);
-
-  const availableBrands = vehicles
-    .flatMap((manufacturer: any) => manufacturer.brands ?? [])
-    .filter((brand: any) =>
-      (brand.models ?? []).some(
-        (model: any) => model.category === selectedVehicleType
-      )
-    );
-  console.log("AVAILABLE BRANDS:", availableBrands);
-
-  const selectedBrandData = availableBrands.find(
-    (brand: any) => brand.name === selectedBrand
-  );
-
-  const availableModels =
-    selectedBrandData?.models.filter(
-      (model: any) => model.category === selectedVehicleType
-    ) ?? [];
-
-  const selectedModelData = availableModels.find(
-    (model: any) => model.name === selectedModel
-  );
-
-  const availableVariants = selectedModelData?.variants ?? [];
-  const [form, setForm] = useState({ name: "", mobile: "", email: "", city: "", state: "", category: "", brand: "", model: "", condition: "", price: "", loan: "", message: "", latitude: "", longitude: "", address: "", village: "", ward: "", policeStation: "", panchayat: "", nac: "", municipality: "", district: "", pincode: "" });
+  const [form, setForm] = useState({ name: "", mobile: "", email: "", city: "", state: "", category: "", condition: "", price: "", loan: "", message: "", latitude: "", longitude: "", address: "", village: "", ward: "", policeStation: "", panchayat: "", nac: "", municipality: "", district: "", pincode: "" });
 
   const captureLocation = () => {
     if (!navigator.geolocation) {
@@ -165,8 +113,6 @@ export default function ApplyPage() {
         city: "",
         state: "",
         category: "",
-        brand: "",
-        model: "",
         condition: "",
         price: "",
         loan: "",
@@ -589,114 +535,21 @@ export default function ApplyPage() {
               </select>
             </label>
 
-            {/* VEHICLE TYPE */}
+            {/* CATEGORY */}
             <label style={{ display: "grid", gap: 8 }}>
               <span style={{ fontSize: 13, fontWeight: 800 }}>
-                Vehicle Type
+                Vehicle / Equipment Category
               </span>
 
-              <select
-                style={inputStyle}
-                value={selectedVehicleType}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  setSelectedVehicleType(value);
-                  setSelectedBrand("");
-                  setSelectedModel("");
-                  updateField("category", value);
-                }}
-              >
-                <option value="">Select vehicle type</option>
-                {categories.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
+              <select style={inputStyle} defaultValue="">
+                <option value="" disabled>
+                  Select category
+                </option>
+                <option>Commercial Vehicle</option>
+                <option>Private Vehicle</option>
+                <option>Construction Equipment</option>
               </select>
             </label>
-
-            {/* BRAND */}
-            <label style={{ display: "grid", gap: 8 }}>
-              <span style={{ fontSize: 13, fontWeight: 800 }}>
-                Vehicle Brand
-              </span>
-
-              <select
-                style={inputStyle}
-                value={selectedBrand}
-                disabled={!selectedVehicleType}
-                onChange={(e) => {
-                  setSelectedBrand(e.target.value);
-                  setSelectedModel("");
-                  updateField("brand", e.target.value);
-                }}
-              >
-                <option value="">Select brand</option>
-                {availableBrands.map((brand: any) => (
-                    <option key={brand.name} value={brand.name}>
-                      {brand.name}
-                    </option>
-                  ))}
-              </select>
-            </label>
-
-            {/* MODEL */}
-            <label style={{ display: "grid", gap: 8 }}>
-              <span style={{ fontSize: 13, fontWeight: 800 }}>
-                Vehicle Model
-              </span>
-
-              <select
-                style={inputStyle}
-                value={selectedModel}
-                disabled={!selectedBrand}
-                onChange={(e) => {
-                  setSelectedModel(e.target.value);
-                  updateField("model", e.target.value);
-                }}
-              >
-                <option value="">Select model</option>
-                {availableModels.map((model: any) => (
-                <option key={model.id} value={model.name}>
-                {model.name}
-                 </option>
-                  ))}
-              </select>
-            </label>
-
-            {selectedModelData?.images?.length > 0 && (
-  <div
-    style={{
-      marginTop: 16,
-      padding: 16,
-      border: "1px solid #30413A",
-      borderRadius: 16,
-      background: "#121C19",
-    }}
-  >
-    <img
-      src={selectedModelData.images[0].url}
-      alt={selectedModelData.images[0].alt || selectedModelData.name}
-      style={{
-        width: "100%",
-        maxHeight: 280,
-        objectFit: "contain",
-        borderRadius: 12,
-      }}
-    />
-
-    <div
-      style={{
-        marginTop: 10,
-        color: "#F2F5F3",
-        fontWeight: 600,
-        fontSize: 16,
-      }}
-    >
-      {selectedModelData.name}
-    </div>
-  </div>
-)}
 
             {/* CONDITION */}
             <label style={{ display: "grid", gap: 8 }}>
@@ -704,7 +557,7 @@ export default function ApplyPage() {
                 Vehicle Condition
               </span>
 
-              <select style={inputStyle} value={form.condition} onChange={(e) => updateField("condition", e.target.value)}>
+              <select style={inputStyle} value={form.category} onChange={(e) => updateField("category", e.target.value)}>
                 <option value="" disabled>
                   Select condition
                 </option>
@@ -850,35 +703,6 @@ export default function ApplyPage() {
     </main>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

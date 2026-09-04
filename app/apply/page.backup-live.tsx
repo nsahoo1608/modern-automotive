@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-
+import { vehicleCatalog } from "./vehicle-catalog";
 
 const inputStyle = {
   width: "100%",
@@ -17,57 +17,15 @@ const inputStyle = {
 };
 
 export default function ApplyPage() {
-  const [vehicles, setVehicles] = useState<any[]>([]);
-  const [selectedVehicleType, setSelectedVehicleType] = useState("");
+  const [selectedVehicleType, setSelectedVehicleType] = useState<string>("");
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedModel, setSelectedModel] = useState("");
-  const [selectedVariant, setSelectedVariant] = useState("");
 
-  useEffect(() => {
-    fetch("/api/vehicles")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          console.log("VEHICLE API DATA:", data.manufacturers);
-          setVehicles(data.manufacturers ?? []);
-        }
-      })
-      .catch(console.error);
-  }, []);
+  const selectedCategory = vehicleCatalog.find((category) => category.name === selectedVehicleType);
+  const availableBrands = selectedCategory?.brands.map((brand) => brand.name) ?? [];
+  const selectedBrandData = selectedCategory?.brands.find((brand) => brand.name === selectedBrand);
+  const availableModels = selectedBrandData?.models.map((model) => model.name) ?? [];
 
-  const categories = [
-    "Commercial Vehicle",
-    "Passenger Vehicle",
-    "Electric Vehicle",
-    "Two Wheeler",
-  ];
-
-  console.log("VEHICLES STATE:", vehicles);
-  console.log("SELECTED TYPE:", selectedVehicleType);
-
-  const availableBrands = vehicles
-    .flatMap((manufacturer: any) => manufacturer.brands ?? [])
-    .filter((brand: any) =>
-      (brand.models ?? []).some(
-        (model: any) => model.category === selectedVehicleType
-      )
-    );
-  console.log("AVAILABLE BRANDS:", availableBrands);
-
-  const selectedBrandData = availableBrands.find(
-    (brand: any) => brand.name === selectedBrand
-  );
-
-  const availableModels =
-    selectedBrandData?.models.filter(
-      (model: any) => model.category === selectedVehicleType
-    ) ?? [];
-
-  const selectedModelData = availableModels.find(
-    (model: any) => model.name === selectedModel
-  );
-
-  const availableVariants = selectedModelData?.variants ?? [];
   const [form, setForm] = useState({ name: "", mobile: "", email: "", city: "", state: "", category: "", brand: "", model: "", condition: "", price: "", loan: "", message: "", latitude: "", longitude: "", address: "", village: "", ward: "", policeStation: "", panchayat: "", nac: "", municipality: "", district: "", pincode: "" });
 
   const captureLocation = () => {
@@ -607,9 +565,9 @@ export default function ApplyPage() {
                 }}
               >
                 <option value="">Select vehicle type</option>
-                {categories.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
+                {vehicleCatalog.map((category) => (
+                  <option key={category.name} value={category.name}>
+                    {category.name}
                   </option>
                 ))}
               </select>
@@ -632,9 +590,9 @@ export default function ApplyPage() {
                 }}
               >
                 <option value="">Select brand</option>
-                {availableBrands.map((brand: any) => (
-                    <option key={brand.name} value={brand.name}>
-                      {brand.name}
+                {availableBrands.map((brand) => (
+                    <option key={brand} value={brand}>
+                      {brand}
                     </option>
                   ))}
               </select>
@@ -656,47 +614,13 @@ export default function ApplyPage() {
                 }}
               >
                 <option value="">Select model</option>
-                {availableModels.map((model: any) => (
-                <option key={model.id} value={model.name}>
-                {model.name}
-                 </option>
-                  ))}
+                {availableModels.map((model) => (
+                  <option key={model} value={model}>
+                    {model}
+                  </option>
+                ))}
               </select>
             </label>
-
-            {selectedModelData?.images?.length > 0 && (
-  <div
-    style={{
-      marginTop: 16,
-      padding: 16,
-      border: "1px solid #30413A",
-      borderRadius: 16,
-      background: "#121C19",
-    }}
-  >
-    <img
-      src={selectedModelData.images[0].url}
-      alt={selectedModelData.images[0].alt || selectedModelData.name}
-      style={{
-        width: "100%",
-        maxHeight: 280,
-        objectFit: "contain",
-        borderRadius: 12,
-      }}
-    />
-
-    <div
-      style={{
-        marginTop: 10,
-        color: "#F2F5F3",
-        fontWeight: 600,
-        fontSize: 16,
-      }}
-    >
-      {selectedModelData.name}
-    </div>
-  </div>
-)}
 
             {/* CONDITION */}
             <label style={{ display: "grid", gap: 8 }}>
@@ -850,20 +774,6 @@ export default function ApplyPage() {
     </main>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
