@@ -76,15 +76,14 @@ export async function POST(request: Request) {
     }
 
     const transporter = nodemailer.createTransport({
-      host: smtpHost,
-      port: smtpPort,
-      secure: false,
-      requireTLS: true,
-      auth: {
-        user: smtpUser,
-        pass: smtpPassword,
-      },
-    });
+  host: smtpHost,
+  port: smtpPort,
+  secure: smtpPort === 465,
+  auth: {
+    user: smtpUser,
+    pass: smtpPassword,
+  },
+});
 
     const applicationTime = new Date().toLocaleString("en-IN", {
       timeZone: "Asia/Kolkata",

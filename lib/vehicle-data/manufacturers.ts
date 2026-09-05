@@ -1,6 +1,10 @@
 ﻿import type { ManufacturerSource } from "./types";
 
 export const manufacturerSources: ManufacturerSource[] = [
+  // ---------------------------------------------------------------------------
+  // COMMERCIAL VEHICLES / BUSES / CHASSIS
+  // ---------------------------------------------------------------------------
+
   {
     id: "mahindra",
     name: "Mahindra",
@@ -64,6 +68,10 @@ export const manufacturerSources: ManufacturerSource[] = [
     officialUrl: "https://piaggio-cv.co.in/",
     vehicleUrl: "https://piaggio-cv.co.in/",
   },
+
+  // ---------------------------------------------------------------------------
+  // PASSENGER VEHICLES
+  // ---------------------------------------------------------------------------
 
   {
     id: "maruti-suzuki",
@@ -158,6 +166,10 @@ export const manufacturerSources: ManufacturerSource[] = [
     vehicleUrl: "https://www.byd.com/in/",
   },
 
+  // ---------------------------------------------------------------------------
+  // PREMIUM / LUXURY
+  // ---------------------------------------------------------------------------
+
   {
     id: "volvo",
     name: "Volvo",
@@ -212,5 +224,157 @@ export const manufacturerSources: ManufacturerSource[] = [
     name: "Porsche",
     officialUrl: "https://www.porsche.com/middle-east/_india_/",
     vehicleUrl: "https://www.porsche.com/middle-east/_india_/",
+  },
+
+  // ---------------------------------------------------------------------------
+  // TWO / THREE WHEELERS
+  // ---------------------------------------------------------------------------
+
+  {
+    id: "hero-motocorp",
+    name: "Hero MotoCorp",
+    officialUrl: "https://www.heromotocorp.com/",
+    vehicleUrl: "https://www.heromotocorp.com/",
+  },
+
+  {
+    id: "honda-two-wheelers",
+    name: "Honda Motorcycle & Scooter India",
+    officialUrl: "https://www.honda2wheelersindia.com/",
+    vehicleUrl: "https://www.honda2wheelersindia.com/",
+  },
+
+  {
+    id: "tvs",
+    name: "TVS Motor",
+    officialUrl: "https://www.tvsmotor.com/",
+    vehicleUrl: "https://www.tvsmotor.com/",
+  },
+
+  {
+    id: "bajaj",
+    name: "Bajaj Auto",
+    officialUrl: "https://www.bajajauto.com/",
+    vehicleUrl: "https://www.bajajauto.com/",
+  },
+
+  {
+    id: "royal-enfield",
+    name: "Royal Enfield",
+    officialUrl: "https://www.royalenfield.com/in/en/home/",
+    vehicleUrl: "https://www.royalenfield.com/in/en/motorcycles/",
+  },
+
+  {
+    id: "yamaha",
+    name: "Yamaha",
+    officialUrl: "https://www.yamaha-motor-india.com/",
+    vehicleUrl: "https://www.yamaha-motor-india.com/",
+  },
+
+  {
+    id: "suzuki-motorcycle",
+    name: "Suzuki Motorcycle India",
+    officialUrl: "https://www.suzukimotorcycle.co.in/",
+    vehicleUrl: "https://www.suzukimotorcycle.co.in/",
+  },
+
+  {
+    id: "ola-electric",
+    name: "Ola Electric",
+    officialUrl: "https://www.olaelectric.com/",
+    vehicleUrl: "https://www.olaelectric.com/",
+  },
+
+  {
+    id: "ather",
+    name: "Ather Energy",
+    officialUrl: "https://www.atherenergy.com/",
+    vehicleUrl: "https://www.atherenergy.com/",
+  },
+
+  // ---------------------------------------------------------------------------
+  // CONSTRUCTION EQUIPMENT
+  // ---------------------------------------------------------------------------
+
+  {
+    id: "jcb",
+    name: "JCB",
+    officialUrl: "https://www.jcb.com/en-in",
+    vehicleUrl: "https://www.jcb.com/en-in/products",
+  },
+
+  {
+    id: "tata-hitachi",
+    name: "Tata Hitachi",
+    officialUrl: "https://www.tatahitachi.co.in/",
+    vehicleUrl: "https://www.tatahitachi.co.in/",
+  },
+
+  {
+    id: "volvo-ce",
+    name: "Volvo Construction Equipment",
+    officialUrl: "https://www.volvoce.com/india/en/",
+    vehicleUrl: "https://www.volvoce.com/india/en/products/",
+  },
+
+  {
+    id: "komatsu",
+    name: "Komatsu",
+    officialUrl: "https://www.komatsu.com/en/",
+    vehicleUrl: "https://www.komatsu.com/en/products/",
+  },
+
+  {
+    id: "sany",
+    name: "SANY",
+    officialUrl: "https://www.sany.in/",
+    vehicleUrl: "https://www.sany.in/",
+  },
+
+  // ---------------------------------------------------------------------------
+  // AGRICULTURAL EQUIPMENT
+  // ---------------------------------------------------------------------------
+
+  {
+    id: "swaraj",
+    name: "Swaraj",
+    officialUrl: "https://www.swarajtractors.com/",
+    vehicleUrl: "https://www.swarajtractors.com/",
+  },
+
+  {
+    id: "sonalika",
+    name: "Sonalika",
+    officialUrl: "https://www.sonalika.com/",
+    vehicleUrl: "https://www.sonalika.com/",
+  },
+
+  {
+    id: "john-deere",
+    name: "John Deere",
+    officialUrl: "https://www.deere.co.in/",
+    vehicleUrl: "https://www.deere.co.in/en/",
+  },
+
+  {
+    id: "new-holland",
+    name: "New Holland Agriculture",
+    officialUrl: "https://agriculture.newholland.com/",
+    vehicleUrl: "https://agriculture.newholland.com/",
+  },
+
+  {
+    id: "tafe",
+    name: "TAFE",
+    officialUrl: "https://www.tafe.com/",
+    vehicleUrl: "https://www.tafe.com/",
+  },
+
+  {
+    id: "kubota",
+    name: "Kubota",
+    officialUrl: "https://www.kubota.co.in/",
+    vehicleUrl: "https://www.kubota.co.in/",
   },
 ];

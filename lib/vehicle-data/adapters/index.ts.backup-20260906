@@ -1,4 +1,4 @@
-﻿import type { ManufacturerAdapter } from "./utils";
+import type { ManufacturerAdapter } from "./utils";
 
 import { fetchAshokLeylandCatalog } from "./ashok-leyland";
 import { fetchBharatBenzCatalog } from "./bharatbenz";
@@ -7,11 +7,6 @@ import { fetchForceMotorsCatalog } from "./force-motors";
 import { fetchMahindraCommercial } from "./mahindra";
 import { fetchSmlIsuzuCatalog } from "./sml-isuzu";
 import { fetchTataCommercial } from "./tata";
-import { fetchJCBCatalog } from "./jcb";
-import { fetchTataHitachiCatalog } from "./tata-hitachi";
-import { fetchVolvoCECatalog } from "./volvo-ce";
-import { fetchKomatsuCatalog } from "./komatsu";
-import { fetchSANYCatalog } from "./sany";
 
 export const manufacturerAdapters: Record<
   string,
@@ -50,29 +45,5 @@ export const manufacturerAdapters: Record<
   "sml-isuzu": {
     manufacturerId: "sml-isuzu",
     fetchCatalog: fetchSmlIsuzuCatalog,
-  },
-  jcb: {
-    manufacturerId: "jcb",
-    fetchCatalog: fetchJCBCatalog,
-  },
-
-  "tata-hitachi": {
-    manufacturerId: "tata-hitachi",
-    fetchCatalog: fetchTataHitachiCatalog,
-  },
-
-  "volvo-ce": {
-    manufacturerId: "volvo-ce",
-    fetchCatalog: fetchVolvoCECatalog,
-  },
-
-  komatsu: {
-    manufacturerId: "komatsu",
-    fetchCatalog: fetchKomatsuCatalog,
-  },
-
-  sany: {
-    manufacturerId: "sany",
-    fetchCatalog: fetchSANYCatalog,
   },
 };

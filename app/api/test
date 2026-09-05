@@ -1,0 +1,36 @@
+import { neon } from "@neondatabase/serverless";
+
+export async function GET() {
+  try {
+    const databaseUrl = process.env.DATABASE_URL;
+
+    if (!databaseUrl) {
+      return Response.json(
+        { success: false, error: "DATABASE_URL is missing" },
+        { status: 500 }
+      );
+    }
+
+    const sql = neon(databaseUrl);
+
+    const result = await sql`
+      SELECT current_database() AS database
+    `;
+
+    return Response.json({
+      success: true,
+      message: "Neon connection successful",
+      database: result[0].database,
+    });
+  } catch (error) {
+    console.error("Neon connection error:", error);
+
+    return Response.json(
+      {
+        success: false,
+        error: "Neon connection failed",
+      },
+      { status: 500 }
+    );
+  }
+}

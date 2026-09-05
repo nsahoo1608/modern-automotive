@@ -9,10 +9,6 @@
   | "Trailer"
   | "Construction Equipment"
   | "Agricultural Equipment"
-  | "Mining Equipment"
-  | "Earthmoving Equipment"
-  | "Road Construction Equipment"
-  | "Industrial Equipment"
   | "Special Purpose Vehicle";
 
 export type VehicleSubcategory = string;
@@ -83,12 +79,6 @@ export type VehicleModel = {
    * Passenger, Cargo.
    */
   application?: string;
-  equipmentType?: string;
-  operatingWeight?: string;
-  payload?: string;
-  capacity?: string;
-  powerSource?: string;
-  specifications?: Record<string, string>;
 
   images: VehicleImage[];
 
@@ -133,6 +123,3 @@ export type VehicleManufacturer = {
 
   brands: VehicleBrand[];
 };
-
-
-

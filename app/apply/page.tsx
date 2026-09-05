@@ -1,4 +1,6 @@
-"use client";
+﻿"use client";
+
+import type { VehicleBrand, VehicleManufacturer, VehicleModel, VehicleVariant } from "@/lib/vehicle-data/types";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -17,7 +19,7 @@ const inputStyle = {
 };
 
 export default function ApplyPage() {
-  const [vehicles, setVehicles] = useState<any[]>([]);
+  const [vehicles, setVehicles] = useState<VehicleManufacturer[]>([]);
   const [selectedVehicleType, setSelectedVehicleType] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedModel, setSelectedModel] = useState("");
@@ -27,10 +29,8 @@ export default function ApplyPage() {
     fetch("/api/vehicles")
       .then((res) => res.json())
       .then((data) => {
-        if (data.success) {
-          console.log("VEHICLE API DATA:", data.manufacturers);
-          setVehicles(data.manufacturers ?? []);
-        }
+        console.log("VEHICLE API DATA:", data.manufacturers);
+        setVehicles(data.manufacturers ?? []);
       })
       .catch(console.error);
   }, []);
@@ -46,25 +46,25 @@ export default function ApplyPage() {
   console.log("SELECTED TYPE:", selectedVehicleType);
 
   const availableBrands = vehicles
-    .flatMap((manufacturer: any) => manufacturer.brands ?? [])
-    .filter((brand: any) =>
+    .flatMap((manufacturer: VehicleManufacturer) => manufacturer.brands ?? [])
+    .filter((brand: VehicleBrand) =>
       (brand.models ?? []).some(
-        (model: any) => model.category === selectedVehicleType
+        (model: VehicleModel) => model.category === selectedVehicleType
       )
     );
-  console.log("AVAILABLE BRANDS:", availableBrands);
+  console.log("AVAILABLE BRANDS:", availableBrands.map((brand: VehicleBrand) => brand.name));
 
   const selectedBrandData = availableBrands.find(
-    (brand: any) => brand.name === selectedBrand
+    (brand: VehicleBrand) => brand.name === selectedBrand
   );
 
   const availableModels =
     selectedBrandData?.models.filter(
-      (model: any) => model.category === selectedVehicleType
+      (model: VehicleModel) => model.category === selectedVehicleType
     ) ?? [];
 
   const selectedModelData = availableModels.find(
-    (model: any) => model.name === selectedModel
+    (model: VehicleModel) => model.name === selectedModel
   );
 
   const availableVariants = selectedModelData?.variants ?? [];
@@ -244,7 +244,7 @@ export default function ApplyPage() {
               fontWeight: 700,
             }}
           >
-            ☎ Support:{" "}
+            â˜Ž Support:{" "}
             <span style={{ color: "#18B878" }}>
               +91-99938307231
             </span>
@@ -259,7 +259,7 @@ export default function ApplyPage() {
               fontWeight: 700,
             }}
           >
-            ← Home
+            â† Home
           </Link>
         </div>
       </nav>
@@ -310,7 +310,7 @@ export default function ApplyPage() {
           }}
         >
           Apply for vehicle and equipment finance through our network of
-          trusted financial partners. New or used — we help you find the
+          trusted financial partners. New or used â€” we help you find the
           right financing solution.
         </p>
       </section>
@@ -632,7 +632,7 @@ export default function ApplyPage() {
                 }}
               >
                 <option value="">Select brand</option>
-                {availableBrands.map((brand: any) => (
+                {availableBrands.map((brand: VehicleBrand) => (
                     <option key={brand.name} value={brand.name}>
                       {brand.name}
                     </option>
@@ -656,7 +656,7 @@ export default function ApplyPage() {
                 }}
               >
                 <option value="">Select model</option>
-                {availableModels.map((model: any) => (
+                {availableModels.map((model: VehicleModel) => (
                 <option key={model.id} value={model.name}>
                 {model.name}
                  </option>
@@ -837,19 +837,24 @@ export default function ApplyPage() {
         </div>
 
         <div>
-          ☎ Support:{" "}
+          â˜Ž Support:{" "}
           <span style={{ color: "#18B878" }}>
             +91-99938307231
           </span>
         </div>
 
         <div style={{ marginTop: 8 }}>
-          Vehicle Finance · Equipment Finance · Insurance
+          Vehicle Finance Â· Equipment Finance Â· Insurance
         </div>
       </footer>
     </main>
   );
 }
+
+
+
+
+
 
 
 
