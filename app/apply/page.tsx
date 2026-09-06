@@ -664,7 +664,7 @@ export default function ApplyPage() {
               </select>
             </label>
 
-            {selectedModelData?.images?.length > 0 && (
+            {selectedModelData && selectedModelData.images && selectedModelData.images.length > 0 && (
   <div
     style={{
       marginTop: 16,
@@ -850,62 +850,4 @@ export default function ApplyPage() {
     </main>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
