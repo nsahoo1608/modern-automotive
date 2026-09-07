@@ -88,6 +88,12 @@ export type VehicleModel = {
   payload?: string;
   capacity?: string;
   powerSource?: string;
+  wheelCount?: number;
+  wheelConfiguration?: string;
+  gvwKg?: number;
+  gcwKg?: number;
+  seatingCapacity?: string;
+  chassisType?: string;
   specifications?: Record<string, string>;
 
   images: VehicleImage[];
@@ -133,6 +139,8 @@ export type VehicleManufacturer = {
 
   brands: VehicleBrand[];
 };
+
+
 
 
 
