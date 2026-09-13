@@ -196,7 +196,7 @@ const TATA_IMAGE_BY_MODEL: Record<string, string> = {
   "Tata Prima E.28K 6X4 Tipper": "https://trucks.tatamotors.com/assets/trucks/files/Products/2026-04/PRIMA%20EV%2028E%202.png?VersionId=B5V7t0.KbDIExsuq2vXAMor_0JP58eI9",
   "Tata SIGNA 2823.K RMC": "https://trucks.tatamotors.com/assets/trucks/files/Products/2026-04/Prima%202832.K%20RMC_Mer%202.png?VersionId=TnmT6aQuOECy03EqoMM0utysgh_lRoYb",
   "Tata SIGNA 2821.K RMC": "https://trucks.tatamotors.com/assets/trucks/files/Products/2026-04/SIgna%202821.K%20RMC%202.png?VersionId=wbGvQvanbZIm5r_Ai1hdehVbecKzAmsP",
-  "Tata SIGNA 2818.K RMC": "https://trucks.tatamotors.com/assets/trucks/files/Products/2026-04/Signa%202818.K%20RMC%202.png?VersionId=btPrR9.IWOBGbV7oyoHQM3L.jdO5QDH_",
+  "Tata SIGNA 2818.K RMC": "https://trucks.tatamotors.com/assets/trucks/files/trucks/2024-02/tata-lpt-signa-2818-1.jpg?VersionId=XChGTOS8XovkGSOerfDGnQI6BUa4NBCc",
   "Tata LPK 2821.K RMC": "https://trucks.tatamotors.com/assets/trucks/files/Products/2026-04/LPK%202821.K.png?VersionId=DJWfl6lelfP1hJzXJI5Jz8fCwNnvH5xr",
 };
 const TATA_OFFICIAL_IMAGE_OVERRIDES: Record<string, string> = {
@@ -279,6 +279,216 @@ const TATA_BUS_ADDITIONAL_MODELS: VehicleModel[] = [
   tataBusModel("Tata Starbus Prime 16+D LP410/29", "Staff & Contract Bus", "https://busesandvans.tatamotors.com/listing-page"),
 ];
 
+const TATA_BULK2_MODELS: VehicleModel[] = [
+  tataTruckModel(
+  "Tata SIGNA 4021.S",
+  "Heavy Haulage",
+  "Auto Logistics / Container / Tanker / Cement / Construction Aggregates / Steel / Industrial Goods",
+  "https://trucks.tatamotors.com/product/tata-signa-4021s",
+  undefined,
+  {
+    wheelCount: 6,
+    gcwKg: 39500,
+  }
+),
+
+  tataTruckModel(
+  "Tata SIGNA 4025.S",
+  "Heavy Haulage",
+  "Auto Logistics / Container / Tanker / Cement / Construction Aggregates / Steel / Industrial Goods",
+  "https://trucks.tatamotors.com/product/tata-signa-4025s",
+  undefined,
+  {
+    wheelCount: 6,
+    gcwKg: 39500,
+  }
+),
+
+  tataTruckModel(
+  "Tata SIGNA 4623.S",
+  "Heavy Haulage",
+  "Auto Logistics / Container / Tanker / Cement / Construction Aggregates / Steel / Industrial Goods",
+  "https://trucks.tatamotors.com/product/tata-signa-4623s",
+  undefined,
+  {
+    wheelCount: 6,
+    gvwKg: 45500,
+    gcwKg: 45500,
+  }
+),
+
+  tataTruckModel(
+  "Tata SIGNA 4625.S",
+  "Heavy Haulage",
+  "Auto Logistics / Container / Tanker / Cement / Construction Aggregates / Steel / Industrial Goods / Coal",
+  "https://trucks.tatamotors.com/product/tata-signa-4625s",
+  undefined,
+  {
+    wheelCount: 6,
+    gvwKg: 45500,
+    gcwKg: 45500,
+  }
+),
+
+  tataTruckModel(
+  "Tata SIGNA/PRIMA 5532.S 6X2",
+  "Tractor",
+  "Long Haul / Container / Heavy Freight",
+  "https://trucks.tatamotors.com/product/tata-signa-5532s-6-2",
+  undefined,
+  {
+    wheelCount: 10,
+    wheelConfiguration: "6x2",
+    gvwKg: 55000,
+    gcwKg: 55000,
+  }
+),
+
+  tataTruckModel(
+    "Tata Ultra T.6",
+    "Truck / Lorry",
+    "Logistics / Distribution / General Cargo",
+    "https://trucks.tatamotors.com/ultra/tata-ultra-t6",
+    undefined,
+    {
+      wheelCount: 4,
+      wheelConfiguration: "4x2",
+      gvwKg: 6950,
+    }
+  ),
+];
+const TATA_BULK_ADDITIONAL_MODELS: VehicleModel[] = [
+  tataTruckModel(
+    "Tata Azura 710",
+    "Truck / Lorry",
+    "Fruits & Vegetables / FMCG / White Goods / E-Commerce / Industrial Goods",
+    "https://trucks.tatamotors.com/product/tata-azura-710",
+    undefined,
+    {
+      wheelCount: 4,
+      wheelConfiguration: "4x2",
+      gvwKg: 7490,
+    }
+  ),
+
+  tataTruckModel(
+    "Tata Azura 1212",
+    "Truck / Lorry",
+    "Auto Logistics / Parcel & Courier / E-commerce / Pharma / Fruits & Vegetables / FMCG",
+    "https://trucks.tatamotors.com/product/tata-azura-1212",
+    undefined,
+    {
+      wheelCount: 6,
+      wheelConfiguration: "4x2",
+      gvwKg: 11990,
+    }
+  ),
+
+  tataTruckModel(
+    "Tata Azura 1918",
+    "Truck / Lorry",
+    "Cement / Building Construction / Industrial Goods / Pharma / Fruits & Vegetables / FMCG / LPG / Containers / White Goods / E-commerce",
+    "https://trucks.tatamotors.com/product/tata-azura-1918",
+    undefined,
+    {
+      wheelCount: 6,
+      wheelConfiguration: "4x2",
+      gvwKg: 18500,
+    }
+  ),
+
+  tataTruckModel(
+    "Tata Ultra E.7",
+    "Truck / Lorry",
+    "E-Commerce / Courier & Parcel / FMCG / White Goods / Municipal",
+    "https://trucks.tatamotors.com/product/tata-ultra-e7",
+    undefined,
+    {
+      gvwKg: 7500,
+    }
+  ),
+
+  tataTruckModel(
+    "Tata Ultra E.9",
+    "Truck / Lorry",
+    "Urban Transportation / Sustainable Logistics",
+    "https://trucks.tatamotors.com/product/tata-ultra-e9",
+    undefined,
+    {
+      gvwKg: 9300,
+    }
+  ),
+
+  tataTruckModel(
+    "Tata Ultra E.12",
+    "Truck / Lorry",
+    "E-Commerce / Courier & Parcel / FMCG / Industrial Goods / Municipal",
+    "https://trucks.tatamotors.com/product/tata-ultra-e12",
+    undefined,
+    {
+      gvwKg: 11990,
+    }
+  ),
+
+  tataTruckModel(
+    "Tata PRIMA 2830.K SRT",
+    "Heavy Haulage",
+    "Cement / Industrial Goods / Tanker / Ore & Minerals / Steel / Coal",
+    "https://trucks.tatamotors.com/prima/tata-prima-2830k-srt",
+    undefined,
+    {
+      wheelCount: 10,
+      gvwKg: 28000,
+    }
+  ),
+
+  tataTruckModel(
+    "Tata PRIMA 3530.K SRT",
+    "Heavy Haulage",
+    "Cement / Industrial Goods / Tanker / Ore & Minerals / Steel / Coal",
+    "https://trucks.tatamotors.com/prima/tata-prima-3530k-srt",
+    undefined,
+    {
+      wheelCount: 12,
+      gvwKg: 35000,
+    }
+  ),
+
+  tataTruckModel(
+    "Tata SIGNA 1923.K",
+    "Truck / Lorry",
+    "Industrial Goods / E-Commerce / LPG / Steel / Auto Logistics / Port",
+    "https://trucks.tatamotors.com/signa/tata-signa-1923k",
+    undefined,
+    {
+      wheelCount: 6,
+      gvwKg: 18500,
+    }
+  ),
+
+  tataTruckModel(
+    "Tata LPK 1416",
+    "Tipper / HYVA",
+    "Mining / Gypsum / Stones / Sand / Soil / Construction Material",
+    "https://trucks.tatamotors.com/tata-lpk-1416",
+    undefined,
+    {
+      gvwKg: 14250,
+    }
+  ),
+
+  tataTruckModel(
+    "Tata SIGNA 4830.TK. FBV",
+    "Heavy Haulage",
+    "Coal Mining / Construction Aggregates / Iron Ore",
+    "https://trucks.tatamotors.com/product/tata-signa-4830-tk-fbv",
+    undefined,
+    {
+      wheelCount: 16,
+      gvwKg: 47500,
+    }
+  ),
+];
 const TATA_ADDITIONAL_MODELS: VehicleModel[] = [
   tataTruckModel("Tata SIGNA 4832.TK 10X2 & 10X4", "Tipper", "Mining / Infrastructure / Heavy Tipper", "https://trucks.tatamotors.com/product/signa-4832-tk", "https://trucks.tatamotors.com/assets/trucks/files/trucks/2026-04/Signa%204832.TK%20Merge%20New%202.png?VersionId=ePkj47stqxlR2Ps3Oi5JFjAhqrz0vCiI", { wheelCount: 16, wheelConfiguration: "10x2 / 10x4", gvwKg: 47500 }),
   tataTruckModel("Tata LPT 709G", "Truck / Lorry", "Cargo / Goods Transport"),
@@ -302,39 +512,23 @@ const TATA_ADDITIONAL_MODELS: VehicleModel[] = [
   tataTruckModel("Tata SIGNA 4023.S", "Heavy Haulage", "Heavy Cargo / Long Haul"),
   tataTruckModel("Tata SIGNA 5521.S 4X2", "Heavy Haulage", "Heavy Cargo / Long Haul"),
   tataTruckModel("Tata SIGNA/PRIMA 5532.S 4X2", "Heavy Haulage", "Heavy Cargo / Long Haul"),
-  tataTruckModel("Tata SIGNA/PRIMA 5532.S 6X2", "Heavy Haulage", "Heavy Cargo / Long Haul"),
-  tataTruckModel("Tata Prima 3530.K LNG", "Tractor", "LNG Tractor Trailer"),
-  tataTruckModel("Tata PRIMA 5530.S 4X2 LNG", "Tractor", "LNG Tractor Trailer"),
-  tataTruckModel("PRIMA E.55S 4X2 TRACTOR", "Tractor", "Electric Tractor Trailer"),
-  tataTruckModel("Tata Prima 2832.K REPTO", "Tipper", "Tipper / HYVA"),  tataTruckModel("Tata PRIMA 3532.K REPTO", "Tipper", "Tipper / HYVA"),
-  tataTruckModel("Tata PRIMA 3532.K/.TK SRT", "Tipper", "Tipper / HYVA"),
-  tataTruckModel("Tata SIGNA 2820.K CNG", "Tipper", "CNG Tipper / HYVA"),
-  tataTruckModel("Tata SIGNA 2832.K/.TK SRT", "Tipper", "Tipper / HYVA"),
-  tataTruckModel("Tata Prima E.28K 6X4 Tipper", "Tipper", "Electric Tipper / HYVA"),
-  tataTruckModel("Tata SIGNA 2823.K RMC", "RMC", "Ready Mix Concrete"),
-  tataTruckModel("Tata SIGNA 2832.K REPTO", "RMC", "Ready Mix Concrete"),
-  tataTruckModel("Tata SIGNA 2821.K RMC", "RMC", "Ready Mix Concrete"),
-  tataTruckModel("Tata SIGNA 2818.K RMC", "RMC", "Ready Mix Concrete"),
-  tataTruckModel("Tata LPK 2821.K RMC", "RMC", "Ready Mix Concrete"),
-  tataTruckModel("Tata SIGNA 2830.K 8 Cum REPTO RMC", "RMC", "Ready Mix Concrete"),
-  tataBusModel("Tata Ultra Prime SKL 58+A+D LPO11.6/54", "School Bus", "https://busesandvans.tatamotors.com/product/ultra-prime-skl-58-a-d-lpo11-6-54"),
-  tataBusModel("Tata Starbus Ultra", "Staff / School / Intercity Bus", "https://busesandvans.tatamotors.com/"),
-  tataBusModel("Tata Starbus", "City / Staff / School Bus", "https://busesandvans.tatamotors.com/"),
+  tataTruckModel(
+  "Tata SIGNA/PRIMA 5532.S 6X2",
+  "Tractor",
+  "Long Haul / Container / Heavy Freight",
+  "https://trucks.tatamotors.com/product/tata-signa-5532s-6-2",
+  undefined,
+  {
+    wheelCount: 10,
+    wheelConfiguration: "6x2",
+    gvwKg: 55000,
+    gcwKg: 55000,
+  }
+),
 ];
 
 export async function fetchTataCommercial(): Promise<VehicleManufacturer> {
   const models: VehicleModel[] = [
-    aceModel(
-      "Tata Intra V40",
-      IMAGES.intraV40,
-      "Diesel",
-      {
-        Engine: "1497 cc",
-        Power: "59.5 kW (80 hp)",
-        Torque: "285 Nm",
-        "Wheelbase": "2450 mm",
-      }
-    ),
 
     aceModel(
       "Tata Intra V20",
@@ -463,7 +657,7 @@ export async function fetchTataCommercial(): Promise<VehicleManufacturer> {
       {
         Engine: "694 cc Bi-Fuel",
         Power: "Petrol 30 hp / CNG 25 hp",
-        Torque: "Petrol 55 Nm / CNG 49â€“50 Nm",
+        Torque: "Petrol 55 Nm / CNG 49–50 Nm",
         "Wheelbase": "2250 mm",
       }
     ),
@@ -495,6 +689,16 @@ export async function fetchTataCommercial(): Promise<VehicleManufacturer> {
   models.push(...TATA_CHASSIS_MODELS);
   models.push(...TATA_ADDITIONAL_MODELS);
   models.push(...TATA_BUS_ADDITIONAL_MODELS);
+for (const bulkModel2 of TATA_BULK2_MODELS) {
+  if (!models.some((model) => model.name === bulkModel2.name)) {
+    models.push(bulkModel2);
+  }
+}
+for (const bulkModel of TATA_BULK_ADDITIONAL_MODELS) {
+  if (!models.some((model) => model.name === bulkModel.name)) {
+    models.push(bulkModel);
+  }
+}
 
 
   return {
@@ -519,6 +723,18 @@ export async function fetchTataCommercial(): Promise<VehicleManufacturer> {
     ],
   };
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -288,7 +288,7 @@ export async function fetchEicherCatalog(): Promise<VehicleManufacturer> {
     fuel: "Diesel",
     engine: "E474 BSVI",
     power: "140 HP @ 3200 rpm",
-    torque: "400 Nm @ 1250â€“2500 rpm",
+    torque: "400 Nm @ 1250–2500 rpm",
     transmission: "ET 40S5",
     specifications: {
       "GVW": "7490 kg",
@@ -369,7 +369,7 @@ export async function fetchEicherCatalog(): Promise<VehicleManufacturer> {
     fuel: "Diesel",
     engine: "VEDX8, BS-VI",
     power: "258 kW @ 2200 rpm",
-    torque: "1350 Nm @ 1200â€“1600 rpm",
+    torque: "1350 Nm @ 1200–1600 rpm",
     transmission: "ET140S9 - 1C + 8F + 1R",
     specifications: {
       "GVW": "28000 kg",
@@ -389,7 +389,7 @@ export async function fetchEicherCatalog(): Promise<VehicleManufacturer> {
     fuel: "Diesel",
     engine: "VEDX8, BS-VI",
     power: "221 kW @ 2200 rpm",
-    torque: "1200 Nm @ 1200â€“1600 rpm",
+    torque: "1200 Nm @ 1200–1600 rpm",
     transmission: "ET140S9 - 1C + 8F + 1R",
     specifications: {
       "GVW": "28000 kg",
@@ -408,7 +408,7 @@ export async function fetchEicherCatalog(): Promise<VehicleManufacturer> {
     fuel: "Diesel",
     engine: "VEDX8 BS-VI",
     power: "194 kW @ 2200 rpm",
-    torque: "1000 Nm @ 1100â€“1700 rpm",
+    torque: "1000 Nm @ 1100–1700 rpm",
     transmission: "ET 140S9, 9-speed",
     specifications: {
       "GVW": "35000 kg",
@@ -447,7 +447,7 @@ export async function fetchEicherCatalog(): Promise<VehicleManufacturer> {
     fuel: "Diesel",
     engine: "VEDX8 BSVI, 6-cylinder, 7.7 L",
     power: "224 kW @ 2200 rpm",
-    torque: "1200 Nm @ 1200â€“1600 rpm",
+    torque: "1200 Nm @ 1200–1600 rpm",
     transmission: "ET140S9, 9-speed manual",
     specifications: {
       "GVW": "35000 kg",
@@ -533,6 +533,7 @@ export async function fetchEicherCatalog(): Promise<VehicleManufacturer> {
     brands: [brand],
   };
 }
+
 
 
 

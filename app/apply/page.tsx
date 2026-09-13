@@ -244,7 +244,7 @@ export default function ApplyPage() {
               fontWeight: 700,
             }}
           >
-            â˜Ž Support:{" "}
+            ☎ Support:{" "}
             <span style={{ color: "#18B878" }}>
               +91-99938307231
             </span>
@@ -259,7 +259,7 @@ export default function ApplyPage() {
               fontWeight: 700,
             }}
           >
-            â† Home
+            ← Home
           </Link>
         </div>
       </nav>
@@ -310,7 +310,7 @@ export default function ApplyPage() {
           }}
         >
           Apply for vehicle and equipment finance through our network of
-          trusted financial partners. New or used â€” we help you find the
+          trusted financial partners. New or used — we help you find the
           right financing solution.
         </p>
       </section>
@@ -837,17 +837,19 @@ export default function ApplyPage() {
         </div>
 
         <div>
-          â˜Ž Support:{" "}
+          ☎ Support:{" "}
           <span style={{ color: "#18B878" }}>
             +91-99938307231
           </span>
         </div>
 
         <div style={{ marginTop: 8 }}>
-          Vehicle Finance Â· Equipment Finance Â· Insurance
+          Vehicle Finance · Equipment Finance · Insurance
         </div>
       </footer>
     </main>
   );
 }
+
+
 
