@@ -1,5 +1,5 @@
 ﻿import type { VehicleManufacturer, VehicleModel, VehicleVariant } from "../types";
-import { emptyModel, makeImage } from "./utils";
+import { emptyModel, emptyVariant, makeImage } from "./utils";
 
 const MAHINDRA = "https://auto.mahindra.com";
 
@@ -197,7 +197,7 @@ const MAHINDRA_BULK_MODELS: VehicleModel[] = [
     const m = emptyModel("mahindra","FURIO 10","https://www.mahindratruckandbus.com/english/intermediate-commercial-vehicles/furio.aspx","Commercial Vehicle");
     m.subcategory="Truck / Lorry";
     m.application="E-Commerce / Parcel / FMCG / Industrial Goods";
-    m.gvwKg=10350; m.images=[makeImage("https://www.mahindratruckandbus.com/english/images/icv/menu/furio-10.jpg","FURIO 10","https://www.mahindratruckandbus.com/english/intermediate-commercial-vehicles/furio.aspx")];
+    m.gvwKg=10350; m.images=[makeImage("https://www.mahindratruckandbus.com/english/images/icv/furio/furio-10/Overview-1.png","FURIO 10","https://www.mahindratruckandbus.com/english/intermediate-commercial-vehicles/furio.aspx")];
     return m;
   })(),
 
@@ -205,7 +205,7 @@ const MAHINDRA_BULK_MODELS: VehicleModel[] = [
     const m = emptyModel("mahindra","FURIO 11","https://www.mahindratruckandbus.com/english/intermediate-commercial-vehicles/furio.aspx","Commercial Vehicle");
     m.subcategory="Truck / Lorry";
     m.application="E-Commerce / Parcel / FMCG / Industrial Goods";
-    m.gvwKg=11280; m.images=[makeImage("https://www.mahindratruckandbus.com/english/images/icv/menu/furio-11.png","FURIO 11","https://www.mahindratruckandbus.com/english/intermediate-commercial-vehicles/furio.aspx")];
+    m.gvwKg=11280; m.images=[makeImage("https://www.mahindratruckandbus.com/english/images/icv/furio/furio-11/Overview-1.jpg","FURIO 11","https://www.mahindratruckandbus.com/english/intermediate-commercial-vehicles/furio.aspx")];
     return m;
   })(),
 
@@ -213,7 +213,8 @@ const MAHINDRA_BULK_MODELS: VehicleModel[] = [
     const m = emptyModel("mahindra","FURIO 12","https://www.mahindratruckandbus.com/english/intermediate-commercial-vehicles/furio.aspx","Commercial Vehicle");
     m.subcategory="Truck / Lorry";
     m.application="E-Commerce / Parcel / FMCG / Industrial Goods";
-    m.gvwKg=11990; m.images=[makeImage("https://www.mahindratruckandbus.com/english/images/icv/menu/furio-12.png","FURIO 12","https://www.mahindratruckandbus.com/english/intermediate-commercial-vehicles/furio.aspx")];
+    m.gvwKg=11990; m.images=[makeImage("https://www.mahindratruckandbus.com/english/images/icv/furio/furio-12/Overview-1.jpg","FURIO 12","https://www.mahindratruckandbus.com/english/intermediate-commercial-vehicles/furio.aspx")];
+    m.variants=[emptyVariant("mahindra","FURIO 12","FURIO 12 HSD","https://www.mahindratruckandbus.com/english/intermediate-commercial-vehicles/furio/furio-furio12-ton-specification.aspx")];
     return m;
   })(),
 
@@ -221,7 +222,7 @@ const MAHINDRA_BULK_MODELS: VehicleModel[] = [
     const m = emptyModel("mahindra","FURIO 14","https://www.mahindratruckandbus.com/english/intermediate-commercial-vehicles/furio.aspx","Commercial Vehicle");
     m.subcategory="Truck / Lorry";
     m.application="E-Commerce / Parcel / FMCG / Industrial Goods";
-    m.gvwKg=14050; m.images=[makeImage("https://www.mahindratruckandbus.com/english/images/icv/menu/furio-14.png","FURIO 14","https://www.mahindratruckandbus.com/english/intermediate-commercial-vehicles/furio.aspx")];
+    m.gvwKg=14050; m.images=[makeImage("https://www.mahindratruckandbus.com/english/images/icv/furio/furio-14/Overview-1.jpg","FURIO 14","https://www.mahindratruckandbus.com/english/intermediate-commercial-vehicles/furio.aspx")];
     return m;
   })(),
 
@@ -229,7 +230,7 @@ const MAHINDRA_BULK_MODELS: VehicleModel[] = [
     const m = emptyModel("mahindra","FURIO 14 HD","https://www.mahindratruckandbus.com/english/intermediate-commercial-vehicles/furio.aspx","Commercial Vehicle");
     m.subcategory="Truck / Lorry";
     m.application="Heavy Duty Cargo / Construction / Industrial Goods";
-    m.gvwKg=13100; m.images=[makeImage("https://www.mahindratruckandbus.com/english/images/icv/menu/furio-14HD.png","FURIO 14 HD","https://www.mahindratruckandbus.com/english/intermediate-commercial-vehicles/furio.aspx")];
+    m.gvwKg=13100; m.images=[makeImage("https://www.mahindratruckandbus.com/english/images/icv/furio/furio-14-HD/furio-14-HD.jpg","FURIO 14 HD","https://www.mahindratruckandbus.com/english/intermediate-commercial-vehicles/furio.aspx")];
     return m;
   })(),
 
