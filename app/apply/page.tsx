@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import type { VehicleBrand, VehicleManufacturer, VehicleModel, VehicleVariant } from "@/lib/vehicle-data/types";
 
@@ -256,7 +256,7 @@ export default function ApplyPage() {
               fontWeight: 700,
             }}
           >
-            ? Support:{" "}
+            Support:{" "}
             <span style={{ color: "#18B878" }}>
               +91-99938307231
             </span>
@@ -271,7 +271,7 @@ export default function ApplyPage() {
               fontWeight: 700,
             }}
           >
-            ?� Home
+            Home
           </Link>
         </div>
       </nav>
@@ -322,7 +322,7 @@ export default function ApplyPage() {
           }}
         >
           Apply for vehicle and equipment finance through our network of
-          trusted financial partners. New or used � we help you find the
+          trusted financial partners. New or used — we help you find the
           right financing solution.
         </p>
       </section>
@@ -784,6 +784,9 @@ export default function ApplyPage() {
                   : "Official price unavailable"}
               </div>
             </label>
+              <div style={{ fontSize: 12, lineHeight: 1.5, color: "#AEBAB5", marginTop: 6 }}>
+                Price may change. Actual price will be as applicable in your state, including government taxes, fees, and prevailing policies.
+              </div>
 
             {/* LOAN */}
             <label style={{ display: "grid", gap: 8 }}>
@@ -894,27 +897,17 @@ export default function ApplyPage() {
         </div>
 
         <div>
-          ? Support:{" "}
+          Support:{" "}
           <span style={{ color: "#18B878" }}>
             +91-99938307231
           </span>
         </div>
 
         <div style={{ marginTop: 8 }}>
-          Vehicle Finance � Equipment Finance � Insurance
+          Vehicle Finance • Equipment Finance • Insurance
         </div>
       </footer>
     </main>
   );
 }
-
-
-
-
-
-
-
-
-
-
 

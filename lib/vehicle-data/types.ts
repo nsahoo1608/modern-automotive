@@ -39,6 +39,13 @@ export type VehicleImage = {
   sourceUrl?: string;
 };
 
+export type VehicleColour = {
+  id: string;
+  name: string;
+  hex?: string;
+  images: VehicleImage[];
+};
+
 export type VehicleVariant = {
   id: string;
   name: string;
@@ -54,6 +61,8 @@ export type VehicleVariant = {
   price?: VehiclePrice;
 
   images: VehicleImage[];
+
+  colours?: VehicleColour[];
 
   specifications?: Record<string, string>;
 
@@ -139,8 +148,3 @@ export type VehicleManufacturer = {
 
   brands: VehicleBrand[];
 };
-
-
-
-
-

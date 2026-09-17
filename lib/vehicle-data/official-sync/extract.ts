@@ -7,6 +7,13 @@ export type ExtractedImage = {
   alt?: string;
 };
 
+export type ExtractedColour = {
+  id: string;
+  name: string;
+  hex?: string;
+  image?: ExtractedImage;
+};
+
 export type ExtractedPrice = {
   amount: number;
   currency: string;
@@ -21,6 +28,7 @@ export type ExtractedVehicle = {
   variantName?: string;
   fuel?: string;
   transmission?: string;
+  colours?: ExtractedColour[];
   source: "html" | "json-ld" | "next-data";
 };
 
@@ -63,7 +71,7 @@ function parseNumber(value: unknown): number | undefined {
 
   if (typeof value !== "string") return undefined;
 
-  const cleaned = value.replace(/[₹,\s]/g, "");
+  const cleaned = value.replace(/[?,\s]/g, "");
 
   const match = cleaned.match(/\d+(?:\.\d+)?/);
 
@@ -321,6 +329,56 @@ function extractHondaNextData(
     return vehicles;
   }
 
+  function collectHondaColours(): ExtractedColour[] {
+    const colours: ExtractedColour[] = [];
+    const seen = new Set<string>();
+
+    $("script").each((_, script) => {
+      const scriptText = $(script).html() ?? "";
+
+      if (!scriptText.includes("chooseCarColor")) {
+        return;
+      }
+
+      const matches = scriptText.match(
+        /"colorId"\s*:\s*(\d+)[\s\S]{0,2500}?"imageUrl"\s*:\s*"([^"]+)"[\s\S]{0,1800}?"chooseCarColor"\s*:\s*\[\s*\{\s*"colorName"\s*:\s*"([^"]+)"[\s\S]*?"colorStart"\s*:\s*"([^"]*)"/g
+      );
+
+      if (!matches) {
+        return;
+      }
+
+      for (const match of matches) {
+        const parsed = match.match(
+          /"colorId"\s*:\s*(\d+)[\s\S]{0,2500}?"imageUrl"\s*:\s*"([^"]+)"[\s\S]{0,1800}?"chooseCarColor"\s*:\s*\[\s*\{\s*"colorName"\s*:\s*"([^"]+)"[\s\S]*?"colorStart"\s*:\s*"([^"]*)"/
+        );
+
+        if (!parsed) {
+          continue;
+        }
+
+        const [, colorId, imageUrl, colorName, colorStart] = parsed;
+
+        if (!colorName || !imageUrl || seen.has(colorName)) {
+          continue;
+        }
+
+        seen.add(colorName);
+
+        colours.push({
+          id: colorId,
+          name: colorName,
+          hex: colorStart ? `#${colorStart}` : undefined,
+          image: {
+            url: imageUrl,
+            alt: colorName,
+          },
+        });
+      }
+    });
+
+    return colours;
+  }
   function collectImages(
     item: Record<string, unknown>
   ): ExtractedImage[] {
@@ -981,8 +1039,4 @@ export function extractPageData(
     vehicles,
   };
 }
-
-
-
-
 
