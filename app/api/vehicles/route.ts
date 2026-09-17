@@ -2,6 +2,7 @@
 
 import { manufacturerAdapters } from "@/lib/vehicle-data/adapters";
 import { manufacturerSources } from "@/lib/vehicle-data/manufacturers";
+import { syncOfficialVehicle } from "@/lib/vehicle-data/official-sync/engine";
 
 export const dynamic = "force-dynamic";
 
@@ -13,6 +14,39 @@ export async function GET() {
     const adapter = manufacturerAdapters[manufacturer.id];
 
     if (!adapter) {
+      if (manufacturer.id === "honda" && manufacturer.priceUrl) {
+        try {
+          const synced = await syncOfficialVehicle({
+            manufacturerId: "honda",
+            url: manufacturer.priceUrl,
+            category: "Passenger Vehicle",
+          });
+
+          if (synced.success && synced.catalog?.vehicles.length) {
+            results.push({
+              id: manufacturer.id,
+              name: manufacturer.name,
+              officialUrl: manufacturer.officialUrl,
+              vehicleUrl: manufacturer.vehicleUrl,
+              priceUrl: manufacturer.priceUrl,
+              dealerLocatorUrl: manufacturer.dealerLocatorUrl,
+              brands: [{
+                id: "honda",
+                name: "Honda",
+                officialUrl: manufacturer.officialUrl,
+                models: synced.catalog.vehicles.map((item) => item.model),
+              }],
+              dataStatus: "official-sync",
+            });
+
+            continue;
+          }
+        } catch (error) {
+          errors[manufacturer.id] =
+            error instanceof Error ? error.message : String(error);
+        }
+      }
+
       results.push({
         id: manufacturer.id,
         name: manufacturer.name,
@@ -66,3 +100,4 @@ export async function GET() {
     errors,
   });
 }
+

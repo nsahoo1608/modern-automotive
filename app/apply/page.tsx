@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import type { VehicleBrand, VehicleManufacturer, VehicleModel, VehicleVariant } from "@/lib/vehicle-data/types";
 
@@ -67,7 +67,19 @@ export default function ApplyPage() {
     (model: VehicleModel) => model.name === selectedModel
   );
 
+  const officialModelPrice = selectedModelData?.variants?.find((variant) => variant.price?.amount != null)?.price?.amount?.toString() ?? "";
+
   const availableVariants = selectedModelData?.variants ?? [];
+
+  const selectedVariantData = availableVariants.find(
+    (variant) => variant.id === selectedVariant
+  );
+
+  const selectedVariantPrice =
+    selectedVariantData?.price?.amount?.toString() ?? officialModelPrice;
+
+
+
   const [form, setForm] = useState({ name: "", mobile: "", email: "", city: "", state: "", category: "", brand: "", model: "", condition: "", price: "", loan: "", message: "", latitude: "", longitude: "", address: "", village: "", ward: "", policeStation: "", panchayat: "", nac: "", municipality: "", district: "", pincode: "" });
 
   const captureLocation = () => {
@@ -244,7 +256,7 @@ export default function ApplyPage() {
               fontWeight: 700,
             }}
           >
-            ☎ Support:{" "}
+            ? Support:{" "}
             <span style={{ color: "#18B878" }}>
               +91-99938307231
             </span>
@@ -259,7 +271,7 @@ export default function ApplyPage() {
               fontWeight: 700,
             }}
           >
-            ← Home
+            ?� Home
           </Link>
         </div>
       </nav>
@@ -310,7 +322,7 @@ export default function ApplyPage() {
           }}
         >
           Apply for vehicle and equipment finance through our network of
-          trusted financial partners. New or used — we help you find the
+          trusted financial partners. New or used � we help you find the
           right financing solution.
         </p>
       </section>
@@ -698,6 +710,43 @@ export default function ApplyPage() {
   </div>
 )}
 
+            {/* VARIANT */}
+            {selectedModelData && availableVariants.length > 0 && (
+              <label style={{ display: "grid", gap: 8 }}>
+                <span style={{ fontSize: 13, fontWeight: 800 }}>
+                  Vehicle Variant
+                </span>
+
+                <select
+                  style={inputStyle}
+                  value={selectedVariant}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setSelectedVariant(value);
+
+                    const variant = availableVariants.find(
+                      (item) => item.id === value
+                    );
+
+                    updateField(
+                      "price",
+                      variant?.price?.amount?.toString() ??
+                        officialModelPrice
+                    );
+                  }}
+                  disabled={!selectedModel}
+                >
+                  <option value="">Select variant</option>
+
+                  {availableVariants.map((variant) => (
+                    <option key={variant.id} value={variant.id}>
+                      {variant.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            )}
+
             {/* CONDITION */}
             <label style={{ display: "grid", gap: 8 }}>
               <span style={{ fontSize: 13, fontWeight: 800 }}>
@@ -711,21 +760,29 @@ export default function ApplyPage() {
                 <option>New</option>
                 <option>Used</option>
               </select>
-            </label>
-
+            </label>            
             {/* PRICE */}
             <label style={{ display: "grid", gap: 8 }}>
               <span style={{ fontSize: 13, fontWeight: 800 }}>
-                Approx. Vehicle Price
+                Official Vehicle Price
               </span>
 
-              <input
-                type="number"
-                placeholder="Enter amount"
-                value={form.price}
-                onChange={(e) => updateField("price", e.target.value)}
-                style={inputStyle}
-              />
+              <div
+                style={{
+                  ...inputStyle,
+                  display: "flex",
+                  alignItems: "center",
+                  minHeight: 50,
+                  boxSizing: "border-box",
+                  fontWeight: 800,
+                  fontSize: 16,
+                  color: "#F2F5F3",
+                }}
+              >
+                {selectedVariantPrice
+                  ? `₹${Number(selectedVariantPrice).toLocaleString("en-IN")}`
+                  : "Official price unavailable"}
+              </div>
             </label>
 
             {/* LOAN */}
@@ -837,19 +894,27 @@ export default function ApplyPage() {
         </div>
 
         <div>
-          ☎ Support:{" "}
+          ? Support:{" "}
           <span style={{ color: "#18B878" }}>
             +91-99938307231
           </span>
         </div>
 
         <div style={{ marginTop: 8 }}>
-          Vehicle Finance · Equipment Finance · Insurance
+          Vehicle Finance � Equipment Finance � Insurance
         </div>
       </footer>
     </main>
   );
 }
+
+
+
+
+
+
+
+
 
 
 
