@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://modern-automotive.vercel.app"),
+  openGraph: {type:"website",siteName:"Rashmi Ranjan Fin Solution",title:"Rashmi Ranjan Fin Solution | Vehicle & Equipment Finance",description:"Explore vehicles, estimate EMI and discuss vehicle finance with our team.",images:[{url:"/images/hero-journey.webp",width:1536,height:1024,alt:"Rashmi Ranjan Fin Solution vehicle finance"}]},
+  twitter: {card:"summary_large_image"},
   title: { default: "Rashmi Ranjan Fin Solution | Vehicle & Equipment Finance", template: "%s | Rashmi Ranjan Fin Solution" },
   description: "Explore vehicles and construction equipment, estimate your monthly EMI, and request new or used vehicle finance with Rashmi Ranjan Fin Solution.",
 };

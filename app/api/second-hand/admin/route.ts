@@ -1,13 +1,19 @@
+import type { Review } from '@/lib/reviews';
 import { isAdmin, records, read, write, sameOrigin, type Listing } from '@/lib/marketplace/store';
 export async function GET() {
  try { if(!await isAdmin()) return Response.json({message:'Administrator sign-in required.'},{status:401});
- return Response.json({listings:await records<Listing>('marketplace/listings/'),enquiries:await records('marketplace/enquiries/'),contacts:await records('contact/messages/'),settings:await read('marketplace/settings.json')},{headers:{'Cache-Control':'private, no-store'}});
+ return Response.json({listings:await records<Listing>('marketplace/listings/'),enquiries:await records('marketplace/enquiries/'),reviews:await records<Review>('reviews/submissions/'),contacts:await records('contact/messages/'),settings:await read('marketplace/settings.json')},{headers:{'Cache-Control':'private, no-store'}});
  } catch {return Response.json({message:'Unable to load administrator data.'},{status:503});}
 }
 export async function PATCH(request: Request) {
  try {
   if(!sameOrigin(request) || !await isAdmin()) return Response.json({message:'Administrator sign-in required.'},{status:401});
   const data=await request.json();
+  if(data.action==='review'){
+   if(typeof data.id!=='string'||! /^[a-f0-9-]{36}$/.test(data.id)||!['approved','rejected','pending'].includes(data.status))return Response.json({message:'Invalid review update.'},{status:400});
+   const review=await read<Review>(`reviews/submissions/${data.id}.json`);if(!review)return Response.json({message:'Review not found.'},{status:404});
+   await write(`reviews/submissions/${data.id}.json`,{...review,status:data.status});return Response.json({success:true});
+  }
   if(data.action==='settings') {
    if(typeof data.monthlyOffer!=='string' || data.monthlyOffer.length>250) return Response.json({message:'Offer text must be under 250 characters.'},{status:400});
    await write('marketplace/settings.json',{monthlyOffer:data.monthlyOffer.trim()});return Response.json({success:true});

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import CustomerReviews from "./components/CustomerReviews";
 import BrandMarquee from "./components/BrandMarquee";
 import { CarFront, Truck, Construction, Zap, ArrowUpRight, Check, ChevronRight } from "lucide-react";
 const categories = [
@@ -67,6 +68,7 @@ export default function HomeContent() {
     </div></section>
     <section className="container section-space"><p className="eyebrow">A SIMPLE WAY FORWARD</p><h2>From a first look<br />to your next move.</h2><div className="process-grid">{[['01', 'Choose your vehicle', 'Browse models or tell us about the vehicle or equipment you already have in mind.'], ['02', 'Share your requirement', 'Submit your contact details and finance needs through one simple application.'], ['03', 'Discuss your options', 'Our team follows up to discuss your requirement and the next steps with lenders.']].map(([number,title,description]) => <div key={number}><Image className="process-photo" src={`/images/${number === "01" ? "passenger" : number === "02" ? "finance" : "commercial"}.webp`} width={500} height={260} alt="Illustrative image for the vehicle finance process" /><span className="process-number">{number}</span><h3>{title}</h3><p>{description}</p></div>)}</div></section>
     <section className="container section-space used-home-promo"><div><p className="eyebrow">RRFIN PRE-OWNED</p><h2>Great vehicles.<br />A second chapter.</h2><p>Browse second-hand vehicles, submit your vehicle with photos, or send your price offer. Our administrator coordinates the next step.</p><div className="hero-actions"><Link className="button button-primary" href="/second-hand">Browse second-hand vehicles ↗</Link><Link className="button button-secondary" href="/second-hand/sell">Sell your vehicle ↗</Link></div></div><Image src="/images/passenger.webp" width={800} height={500} alt="Illustrative image for the pre-owned vehicle marketplace" /></section><section id="partners" className="container section-space partners-section"><div className="section-heading"><div><p className="eyebrow">MORE WAYS TO MOVE FORWARD</p><h2>Explore finance options.</h2></div><p>Compare information from established lenders.<br />Visit their websites for current products and terms.</p></div><div className="lender-grid">{banks.map(([name,url]) => <a key={name} href={url} target="_blank" rel="noopener noreferrer">{name}<ArrowUpRight size={17} /></a>)}</div></section>
+    <CustomerReviews preview />
     <section className="container final-cta"><Image className="cta-photo" src="/images/hero-journey.webp" fill sizes="100vw" alt="" /><div><p className="eyebrow">YOUR NEXT CHAPTER</p><h2>Let’s get you moving.</h2><p>Share your requirement. We’ll help you explore the next step.</p></div><Link className="button button-primary" href="/apply">Start my application <ArrowUpRight size={18} /></Link></section>
   </main>;
 }
