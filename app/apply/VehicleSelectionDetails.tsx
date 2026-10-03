@@ -23,6 +23,6 @@ export default function VehicleSelectionDetails({ name, brand, model, variant }:
     {Object.values(specs).some(Boolean) && <dl className="selection-specs">{Object.entries(specs).filter(([, value]) => value).map(([label, value]) => <div key={label}><dt>{label.replace(/([a-z])([A-Z])/g, '$1 $2')}</dt><dd>{value}</dd></div>)}</dl>}
     {!!variant?.colours?.length && <p>Manufacturer colours: {variant.colours.map(colour => colour.name).join(' · ')}. Mention your preferred colour in Additional Requirement.</p>}
     {price && <p>₹{price.amount.toLocaleString('en-IN')} · {price.type.replaceAll('-', ' ')}{price.city ? ` · ${price.city}` : ''}. Source checked {new Date(price.verifiedAt).toLocaleDateString('en-IN')}. Confirm current availability and final on-road price with the dealer.</p>}
-    {!model && <p>Model details are available through this brand’s official catalogue. Enter the exact model, variant and brochure link in Additional Requirement.</p>}
+    {!model && <p>Use the official catalogue to confirm the model and variant entered above. Add a brochure link or preferred colour in Additional Requirement.</p>}
   </aside>;
 }

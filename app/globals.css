@@ -319,3 +319,28 @@ body > main { width: 100%; min-width: 0; }
 @media(max-width:1050px) { .main-navigation { gap:12px; font-size:11px; }.used-detail-layout { grid-template-columns:1fr; } }
 @media(max-width:800px) { .marketplace-hero,.used-home-promo { grid-template-columns:1fr; gap:25px; }.marketplace-hero img,.used-home-promo img { height:260px; } }
 @media(prefers-reduced-motion:reduce) { .monthly-offer strong { animation:none; } }
+
+/* Application field rhythm: labels and inputs stay together in every row. */
+.client-input-grid { grid-template-columns: repeat(2,minmax(0,1fr)) !important; align-items: start; gap: 24px !important; }
+.client-input-grid > label { align-content: start; min-width: 0; }
+.client-input-grid input, .client-input-grid select { min-height: 52px; }
+.application-page input:focus-visible, .application-page select:focus-visible, .application-page textarea:focus-visible { outline: 2px solid #67d9ac !important; outline-offset: 3px; }
+.application-page input::placeholder, .application-page textarea::placeholder { color: #81978b; opacity: 1; }
+.client-section-heading { grid-column: 1 / -1; display: flex; gap: 16px; align-items: center; border-bottom: 1px solid #30483a; padding: 16px 0; margin-top: 10px; }
+.client-section-heading > span { width: 38px; height: 38px; display: grid; place-items: center; flex-shrink: 0; border: 1px solid #3e6a51; border-radius: 50%; color: #8ee7bc; font-size: 12px; }
+.client-section-heading h3 { margin: 0; font-size: 20px; font-weight: 650; }
+.client-section-heading p { margin: 6px 0 0; color: #a8b5b0; font-size: 13px; line-height: 1.6; }
+.client-location-panel { grid-column: 1 / -1; margin-top: 0 !important; }
+.client-location-panel button { width: auto !important; min-height: 48px; }
+.client-price-note { grid-column: 1 / -1; margin: 0 !important; }
+@media(max-width:640px) { .client-input-grid { grid-template-columns: minmax(0,1fr) !important; gap: 20px !important; } .client-location-panel button { width: 100% !important; } }
+
+/* Compact customer fields with useful desktop density. */
+.client-input-grid { grid-template-columns: repeat(3,minmax(0,1fr)) !important; gap: 18px !important; }
+.client-input-grid input, .client-input-grid select { min-height: 44px; height: 44px; padding: 10px 12px !important; }
+.client-input-grid > label { gap: 7px !important; }
+.client-section-heading { padding: 12px 0; }
+.application-page form { padding: clamp(20px,2.5vw,32px) !important; }
+.application-page textarea { padding: 10px 12px !important; }
+@media(max-width:1000px) { .client-input-grid { grid-template-columns: repeat(2,minmax(0,1fr)) !important; } }
+@media(max-width:640px) { .client-input-grid { grid-template-columns: minmax(0,1fr) !important; gap: 16px !important; } }

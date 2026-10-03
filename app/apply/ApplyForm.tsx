@@ -13,8 +13,8 @@ const inputStyle = {
   width: "100%",
   boxSizing: "border-box" as const,
   border: "1px solid #30413A",
-  borderRadius: 12,
-  padding: "14px 15px",
+  borderRadius: 9,
+  padding: "10px 12px",
   background: "#0B1110",
   color: "#F2F5F3",
   outline: "none",
@@ -35,8 +35,8 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
     const controller = new AbortController();
     fetch("/api/vehicles", { signal: controller.signal })
       .then(async (res) => { if (!res.ok) throw new Error("Vehicle catalogue is unavailable."); return res.json(); })
-      .then((data) => { setVehicles(data.manufacturers ?? []); if (Object.keys(data.errors ?? {}).length) setCatalogueError("Some manufacturer details are unavailable. You can still apply using Additional Requirement."); })
-      .catch((error) => { if (error.name !== "AbortError") setCatalogueError("We could not load the vehicle catalogue. Retry, or describe your vehicle in Additional Requirement."); })
+      .then((data) => { setVehicles(data.manufacturers ?? []); if (Object.keys(data.errors ?? {}).length) setCatalogueError("Some live catalogues could not load. Official brand links and exact model entry remain available."); })
+      .catch((error) => { if (error.name !== "AbortError") setCatalogueError("We could not load the live catalogue. Use the official brand links and enter your exact model, or retry."); })
       .finally(() => { if (!controller.signal.aborted) setCatalogueLoading(false); });
     return () => controller.abort();
   }, [reload]);
@@ -51,6 +51,7 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
     );
 
   const directoryBrands = brandDirectory.filter(brand => brand.category === selectedVehicleType && !availableBrands.some(item => item.name === brand.name));
+  const otherDirectoryBrands = brandDirectory.filter(brand => brand.category !== selectedVehicleType && !availableBrands.some(item => item.name === brand.name));
   const selectedBrandData = availableBrands.find(
     (brand: VehicleBrand) => brand.name === selectedBrand
   );
@@ -161,7 +162,7 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...form, price: selectedVariantPrice, variant: selectedVariantData?.name ?? "" }),
+        body: JSON.stringify({ ...form, price: selectedVariantPrice, variant: selectedVariantData?.name ?? selectedVariant }),
       });
 
       const data = await response.json();
@@ -306,7 +307,7 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
             Share your requirement and our finance team will contact you.
           </p>
 
-          <div
+          <div className="client-input-grid"
             style={{
               display: "grid",
               gridTemplateColumns:
@@ -314,10 +315,11 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
               gap: 20,
             }}
           >
+            <div className="client-section-heading"><span>01</span><div><h3>Your contact details</h3><p>Use the name and mobile number our team can reach you on.</p></div></div>
             {/* NAME */}
             <label style={{ display: "grid", gap: 8 }}>
               <span style={{ fontSize: 13, fontWeight: 800 }}>
-                Full Name
+                Full name *
               </span>
 
               <input
@@ -332,7 +334,7 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
             {/* MOBILE */}
             <label style={{ display: "grid", gap: 8 }}>
               <span style={{ fontSize: 13, fontWeight: 800 }}>
-                Applicant Mobile Number
+                Mobile number *
               </span>
 
               <div
@@ -374,7 +376,7 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
             {/* EMAIL */}
             <label style={{ display: "grid", gap: 8 }}>
               <span style={{ fontSize: 13, fontWeight: 800 }}>
-                Email Address
+                Email address (optional)
               </span>
 
               <input
@@ -401,8 +403,28 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
               />
             </label>
 
+            {/* STATE */}
+            <label style={{ display: "grid", gap: 8 }}>
+              <span style={{ fontSize: 13, fontWeight: 800 }}>
+                State
+              </span>
+
+              <select style={inputStyle} value={form.state} onChange={(e) => updateField("state", e.target.value)}>
+                <option value="" disabled>
+                  Select state
+                </option>
+                <option>Odisha</option>
+                <option>West Bengal</option>
+                <option>Jharkhand</option>
+                <option>Chhattisgarh</option>
+                <option>Andhra Pradesh</option>
+                <option>Telangana</option>
+                <option>Other</option>
+              </select>
+            </label>
+
             {/* GEO LOCATION */}
-            <div style={{
+            <div className="client-location-panel" style={{
               marginTop: 18,
               padding: 20,
               border: "1px solid #30413A",
@@ -414,7 +436,7 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
               </div>
 
               <div style={{ fontSize: 12, color: "#A8B5B0", marginBottom: 14 }}>
-                Detect your current location to automatically fetch your address.
+                Enter your address manually, or use location detection to fill available details. You can correct every field.
               </div>
 
               <button
@@ -444,7 +466,8 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
                   type="text"
                   aria-label="Village / Locality" placeholder="Village / Locality"
                   value={form.village}
-                  readOnly
+                  onChange={(e) => updateField("village", e.target.value)}
+                  name="village"
                   style={inputStyle}
                 />
 
@@ -452,7 +475,8 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
                   type="text"
                   aria-label="Ward" placeholder="Ward"
                   value={form.ward}
-                  readOnly
+                  onChange={(e) => updateField("ward", e.target.value)}
+                  name="ward"
                   style={inputStyle}
                 />
 
@@ -460,7 +484,8 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
                   type="text"
                   aria-label="Police Station" placeholder="Police Station"
                   value={form.policeStation}
-                  readOnly
+                  onChange={(e) => updateField("policeStation", e.target.value)}
+                  name="policeStation"
                   style={inputStyle}
                 />
 
@@ -468,7 +493,8 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
                   type="text"
                   aria-label="Panchayat" placeholder="Panchayat"
                   value={form.panchayat}
-                  readOnly
+                  onChange={(e) => updateField("panchayat", e.target.value)}
+                  name="panchayat"
                   style={inputStyle}
                 />
 
@@ -476,7 +502,8 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
                   type="text"
                   aria-label="NAC / Town" placeholder="NAC / Town"
                   value={form.nac}
-                  readOnly
+                  onChange={(e) => updateField("nac", e.target.value)}
+                  name="nac"
                   style={inputStyle}
                 />
 
@@ -484,7 +511,8 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
                   type="text"
                   aria-label="Municipality" placeholder="Municipality"
                   value={form.municipality}
-                  readOnly
+                  onChange={(e) => updateField("municipality", e.target.value)}
+                  name="municipality"
                   style={inputStyle}
                 />
 
@@ -492,7 +520,8 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
                   type="text"
                   aria-label="District" placeholder="District"
                   value={form.district}
-                  readOnly
+                  onChange={(e) => updateField("district", e.target.value)}
+                  name="district"
                   style={inputStyle}
                 />
 
@@ -500,7 +529,8 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
                   type="text"
                   aria-label="PIN Code" placeholder="PIN Code"
                   value={form.pincode}
-                  readOnly
+                  onChange={(e) => updateField("pincode", e.target.value)}
+                  name="pincode"
                   style={inputStyle}
                 />
 
@@ -508,7 +538,8 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
                   type="text"
                   aria-label="Full Address" placeholder="Full Address"
                   value={form.address}
-                  readOnly
+                  onChange={(e) => updateField("address", e.target.value)}
+                  name="address"
                   style={{ ...inputStyle, gridColumn: "1 / -1" }}
                 />
               </div>
@@ -523,26 +554,7 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
                 </div>
               )}
             </div>
-            {/* STATE */}
-            <label style={{ display: "grid", gap: 8 }}>
-              <span style={{ fontSize: 13, fontWeight: 800 }}>
-                State
-              </span>
-
-              <select style={inputStyle} value={form.state} onChange={(e) => updateField("state", e.target.value)}>
-                <option value="" disabled>
-                  Select state
-                </option>
-                <option>Odisha</option>
-                <option>West Bengal</option>
-                <option>Jharkhand</option>
-                <option>Chhattisgarh</option>
-                <option>Andhra Pradesh</option>
-                <option>Telangana</option>
-                <option>Other</option>
-              </select>
-            </label>
-
+            <div className="client-section-heading"><span>02</span><div><h3>Your vehicle</h3><p>Choose the category, brand and exact model you need.</p></div></div>
             {/* VEHICLE TYPE */}
             <label style={{ display: "grid", gap: 8 }}>
               <span style={{ fontSize: 13, fontWeight: 800 }}>
@@ -588,23 +600,23 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
                 }}
               >
                 <option value="">Select brand</option>
-                {directoryBrands.map(brand => <option key={brand.id} value={brand.name}>{brand.name} · official website</option>)}
+                <optgroup label="Brands for this category">{directoryBrands.map(brand => <option key={brand.id} value={brand.name}>{brand.name}</option>)}
                 {availableBrands.map((brand: VehicleBrand) => (
                     <option key={brand.name} value={brand.name}>
                       {brand.name}
                     </option>
-                  ))}
+                  ))}</optgroup><optgroup label="All other registered brands">{otherDirectoryBrands.map(brand => <option key={brand.id} value={brand.name}>{brand.name}</option>)}</optgroup>
               </select>
             </label>
 
-            {selectedBrand && !selectedBrandData && !catalogueLoading && <p className="directory-note">Model data for this brand is not yet available. Enter the model and variant in Additional Requirement; our team can discuss your request.</p>}
+            {selectedBrand && availableModels.length === 0 && !catalogueLoading && <p className="directory-note client-price-note">Open this manufacturer’s official catalogue below, then enter your exact model and variant here.</p>}
             {/* MODEL */}
             <label style={{ display: "grid", gap: 8 }}>
               <span style={{ fontSize: 13, fontWeight: 800 }}>
                 Vehicle Model
               </span>
 
-              <select
+              {!catalogueLoading && selectedBrand && availableModels.length === 0 ? <input name="model" type="text" maxLength={150} placeholder="Exact model from the official catalogue" style={inputStyle} value={selectedModel} onChange={(e) => { setSelectedModel(e.target.value); setSelectedVariant(""); updateField("model", e.target.value); }} /> : <select
                 style={inputStyle}
                 value={selectedModel}
                 disabled={!selectedBrand}
@@ -620,9 +632,10 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
                 {model.name}
                  </option>
                   ))}
-              </select>
+              </select>}
             </label>
 
+            {!catalogueLoading && selectedBrand && availableModels.length === 0 && <label style={{ display: "grid", gap: 8 }}><span style={{ fontSize: 13, fontWeight: 800 }}>Vehicle variant / trim</span><input name="variant" type="text" maxLength={150} placeholder="Variant, trim or equipment configuration" style={inputStyle} value={selectedVariant} onChange={(e) => setSelectedVariant(e.target.value)} /></label>}
             <VehicleSelectionDetails key={`${selectedBrand}-${selectedModel}-${selectedVariant}`} name={selectedBrand} brand={selectedBrandData} model={selectedModelData} variant={selectedVariantData} />
             {/* VARIANT */}
             {selectedModelData && availableVariants.length > 0 && (
@@ -661,6 +674,7 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
               </label>
             )}
 
+            <div className="client-section-heading"><span>03</span><div><h3>Your finance requirement</h3><p>Tell us the vehicle condition and the amount you want to finance.</p></div></div>
             {/* CONDITION */}
             <label style={{ display: "grid", gap: 8 }}>
               <span style={{ fontSize: 13, fontWeight: 800 }}>
@@ -698,19 +712,19 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
                   : "Official price unavailable"}
               </div>
             </label>
-              <div style={{ fontSize: 12, lineHeight: 1.5, color: "#AEBAB5", marginTop: 6 }}>
+              <div className="client-price-note" style={{ fontSize: 12, lineHeight: 1.5, color: "#AEBAB5", marginTop: 6 }}>
                 Price may change. Actual price will be as applicable in your state, including government taxes, fees, and prevailing policies.
               </div>
 
             {/* LOAN */}
             <label style={{ display: "grid", gap: 8 }}>
               <span style={{ fontSize: 13, fontWeight: 800 }}>
-                Required Loan Amount
+                Required loan amount (₹)
               </span>
 
               <input
                 type="number" min="1"
-                placeholder="Enter amount"
+                placeholder="e.g. 500000"
                 value={form.loan}
                 onChange={(e) => updateField("loan", e.target.value)}
                 style={inputStyle}
