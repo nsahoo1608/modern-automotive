@@ -1,4 +1,4 @@
-﻿export type VehicleType =
+export type VehicleType =
   | "Passenger Vehicle"
   | "Commercial Vehicle"
   | "Electric Vehicle"
@@ -105,6 +105,10 @@ export type VehicleModel = {
   chassisType?: string;
   specifications?: Record<string, string>;
 
+  liveCatalogue?: boolean;
+  detailsLoaded?: boolean;
+  model3dUrl?: string;
+  rotationImages?: VehicleImage[];
   images: VehicleImage[];
 
   variants: VehicleVariant[];

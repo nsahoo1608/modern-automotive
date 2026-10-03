@@ -35,11 +35,43 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
     const controller = new AbortController();
     fetch("/api/vehicles", { signal: controller.signal })
       .then(async (res) => { if (!res.ok) throw new Error("Vehicle catalogue is unavailable."); return res.json(); })
-      .then((data) => { setVehicles(data.manufacturers ?? []); if (Object.keys(data.errors ?? {}).length) setCatalogueError("Some live catalogues could not load. Official brand links and exact model entry remain available."); })
-      .catch((error) => { if (error.name !== "AbortError") setCatalogueError("We could not load the live catalogue. Use the official brand links and enter your exact model, or retry."); })
+      .then((data) => { setVehicles(previous => [...(data.manufacturers ?? []).filter((item: VehicleManufacturer) => !previous.some(existing => existing.id === item.id && existing.brands.some(brand => brand.models.some(model => model.detailsLoaded || model.liveCatalogue)))), ...previous.filter(existing => existing.brands.some(brand => brand.models.some(model => model.detailsLoaded || model.liveCatalogue)))]); if (Object.keys(data.errors ?? {}).length) setCatalogueError("Some manufacturer connections are unavailable. Select a brand to load its in-form catalogue."); })
+      .catch((error) => { if (error.name !== "AbortError") setCatalogueError("The main catalogue could not load. Select a brand for its manufacturer connection, or retry."); })
       .finally(() => { if (!controller.signal.aborted) setCatalogueLoading(false); });
     return () => controller.abort();
   }, [reload]);
+  const [brandLoading, setBrandLoading] = useState(false);
+  const [brandError, setBrandError] = useState("");
+  const [detailLoading, setDetailLoading] = useState(false);
+  const selectedDirectoryBrand = brandDirectory.find(item => item.name === selectedBrand);
+  const sourceId = selectedDirectoryBrand?.id;
+  useEffect(() => {
+    if (!sourceId) return;
+    const controller = new AbortController();
+    const registryBrand = vehicles.flatMap(item => item.brands).find(item => item.name === selectedBrand);
+    if (registryBrand?.models.some(model => model.category === selectedVehicleType)) return;
+    // Track the start of this external manufacturer request.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setBrandLoading(true); setBrandError("");
+    fetch('/api/vehicle-catalogue?brand=' + encodeURIComponent(sourceId) + '&category=' + encodeURIComponent(selectedVehicleType), { signal: controller.signal })
+      .then(async response => { const data = await response.json(); if (!response.ok) throw Error(data.message); if (!data.brand.models.length) throw Error(data.message); setVehicles(previous => [...previous.filter(item => item.id !== sourceId), { id: sourceId, name: data.brand.name, officialUrl: data.brand.officialUrl, sources: [], brands: [{ ...data.brand, models: data.brand.models.map((model: VehicleModel) => ({ ...model, liveCatalogue: true })) }] }]); })
+      .catch(error => { if(error.name !== 'AbortError') setBrandError(error.message); })
+      .finally(() => { if(!controller.signal.aborted) setBrandLoading(false); });
+    return () => controller.abort();
+  }, [sourceId, selectedBrand, selectedVehicleType, reload, vehicles]);
+  useEffect(() => {
+    if (!sourceId || !selectedModel) return;
+    const model = vehicles.flatMap(item => item.brands).find(item => item.name === selectedBrand)?.models.find(item => item.name === selectedModel);
+    if (!model || model.detailsLoaded) return;
+    const controller = new AbortController();
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Track the external detail request lifecycle.
+    setDetailLoading(true); setBrandError("");
+    fetch('/api/vehicle-catalogue?brand=' + encodeURIComponent(sourceId) + '&category=' + encodeURIComponent(selectedVehicleType) + '&model=' + encodeURIComponent(model.id), { signal: controller.signal })
+      .then(async response => { const data = await response.json(); if (!response.ok) throw Error(data.message); setVehicles(previous => previous.map(manufacturer => ({ ...manufacturer, brands: manufacturer.brands.map(brand => brand.name !== selectedBrand ? brand : { ...brand, models: brand.models.map(item => item.id === model.id ? { ...data.model, detailsLoaded: true } : item) }) }))); })
+      .catch(error => { if(error.name !== 'AbortError') setBrandError(error.message); })
+      .finally(() => { if(!controller.signal.aborted) setDetailLoading(false); });
+    return () => controller.abort();
+  }, [sourceId, selectedBrand, selectedModel, selectedVehicleType, vehicles, reload]);
   const categories = vehicleCategoryNames;
 
   const availableBrands = vehicles
@@ -162,7 +194,7 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...form, price: selectedVariantPrice, variant: selectedVariantData?.name ?? selectedVariant }),
+        body: JSON.stringify({ ...form, price: selectedVariantPrice, variant: selectedVariantData?.name ?? selectedVariant, configuration: { ...selectedModelData?.specifications, ...selectedVariantData?.specifications }, manufacturerReference: selectedModelData?.officialUrl ?? "" }),
       });
 
       const data = await response.json();
@@ -609,33 +641,10 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
               </select>
             </label>
 
-            {selectedBrand && availableModels.length === 0 && !catalogueLoading && <p className="directory-note client-price-note">Open this manufacturer’s official catalogue below, then enter your exact model and variant here.</p>}
-            {/* MODEL */}
-            <label style={{ display: "grid", gap: 8 }}>
-              <span style={{ fontSize: 13, fontWeight: 800 }}>
-                Vehicle Model
-              </span>
-
-              {!catalogueLoading && selectedBrand && availableModels.length === 0 ? <input name="model" type="text" maxLength={150} placeholder="Exact model from the official catalogue" style={inputStyle} value={selectedModel} onChange={(e) => { setSelectedModel(e.target.value); setSelectedVariant(""); updateField("model", e.target.value); }} /> : <select
-                style={inputStyle}
-                value={selectedModel}
-                disabled={!selectedBrand}
-                onChange={(e) => {
-                  setSelectedModel(e.target.value);
-                  setSelectedVariant("");
-                  setForm(prev => ({ ...prev, model: e.target.value, price: "" }));
-                }}
-              >
-                <option value="">Select model</option>
-                {availableModels.map((model: VehicleModel) => (
-                <option key={model.id} value={model.name}>
-                {model.name}
-                 </option>
-                  ))}
-              </select>}
-            </label>
-
-            {!catalogueLoading && selectedBrand && availableModels.length === 0 && <label style={{ display: "grid", gap: 8 }}><span style={{ fontSize: 13, fontWeight: 800 }}>Vehicle variant / trim</span><input name="variant" type="text" maxLength={150} placeholder="Variant, trim or equipment configuration" style={inputStyle} value={selectedVariant} onChange={(e) => setSelectedVariant(e.target.value)} /></label>}
+            <label style={{display:"grid",gap:8}}><span style={{fontSize:13,fontWeight:800}}>Vehicle Model</span><select style={inputStyle} value={selectedModel} disabled={!selectedBrand || brandLoading} onChange={e=>{setSelectedModel(e.target.value);setSelectedVariant("");setForm(previous=>({...previous,model:e.target.value,price:""}));}}><option value="">{brandLoading?"Loading manufacturer models…":"Select model"}</option>{availableModels.map(model=><option key={model.id} value={model.name}>{model.name}</option>)}</select></label>
+            {brandLoading && <p className="client-price-note" role="status">Connecting to the manufacturer catalogue…</p>}
+            {detailLoading && <p className="client-price-note" role="status">Loading exact images, variants and configuration…</p>}
+            {brandError && <p className="client-price-note" role="alert">{brandError} <button type="button" onClick={()=>setReload(value=>value+1)}>Retry manufacturer connection</button></p>}
             <VehicleSelectionDetails key={`${selectedBrand}-${selectedModel}-${selectedVariant}`} name={selectedBrand} brand={selectedBrandData} model={selectedModelData} variant={selectedVariantData} />
             {/* VARIANT */}
             {selectedModelData && availableVariants.length > 0 && (
@@ -661,7 +670,7 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
                         officialModelPrice
                     );
                   }}
-                  disabled={!selectedModel}
+                  disabled={!selectedModel || detailLoading}
                 >
                   <option value="">Select variant</option>
 

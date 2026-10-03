@@ -1,4 +1,4 @@
-﻿import { NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
 function escapeHtml(value: unknown): string {
@@ -58,6 +58,7 @@ export async function POST(request: Request) {
     if (loan && (!Number.isFinite(Number(loan)) || Number(loan) <= 0)) {
       return NextResponse.json({ success: false, message: "Please enter a valid loan amount." }, { status: 400 });
     }
+    const configuration = data.configuration && typeof data.configuration === "object" && !Array.isArray(data.configuration) ? Object.entries(data.configuration).filter(([key, value]) => key.length <= 120 && typeof value === "string" && value.length <= 400).slice(0, 100) : [];
     const smtpHost = process.env.SMTP_HOST;
     const smtpPort = Number(process.env.SMTP_PORT || 587);
     const smtpUser = process.env.SMTP_USER;
@@ -135,6 +136,9 @@ export async function POST(request: Request) {
           <p><strong>Vehicle Price:</strong> ${escapeHtml(price || "Not provided")}</p>
           <p><strong>Loan Required:</strong> ${escapeHtml(loan || "Not provided")}</p>
 
+          <h3>Manufacturer configuration supplied with the application</h3>
+          <p>Manufacturer reference: ${escapeHtml(String(data.manufacturerReference ?? "").slice(0, 1000))}</p>
+          <ul>${configuration.map(([key, value]) => `<li><strong>${escapeHtml(key)}:</strong> ${escapeHtml(value)}</li>`).join("")}</ul>
           <h3>Location Details</h3>
 
           <p><strong>City:</strong> ${escapeHtml(city || "Not provided")}</p>

@@ -38,3 +38,11 @@ The GitHub repository `nsahoo1608/modern-automotive` is linked to Vercel project
 - The administrator approves or hides listings, marks vehicles reserved/sold, sets an optional RRFIN offer price and edits the monthly promotion banner. Reduced-motion visitors see a static banner.
 - Buyers can submit a price offer, request an inspection or discuss finance. Enquiries are private to the administrator. Payments and ownership transfer are currently coordinated outside checkout; no payment gateway or escrow is connected.
 - Initial marketplace verification covered submission, moderation, private photographs, public field filtering, authenticated administration, buyer offers and sold-state rejection using disposable fictitious records. Production build and targeted lint passed.
+
+## In-form manufacturer connection and contact enquiries
+
+- `/api/vehicle-catalogue` loads manufacturer model lists on demand and enriches selected models with manufacturer images and specification/trim tables. Toyota and Hyundai have verified navigation adapters; other registered brands use supported vehicle/model navigation patterns. Blocked pages or unsupported layouts are reported in the form. Full global model/variant coverage is not yet available.
+- The application no longer redirects customers to manufacturer websites. Selected manufacturer configuration details accompany the finance email. Interactive 3D and 360-degree controls require actual manufacturer GLB files or a published rotation-frame sequence; ordinary vehicle photos are not labelled as 3D.
+- `/contact` accepts customer enquiries, generates `RRFIN-date-random` references and saves messages privately in the connected Blob store. Company inbox notifications use the configured SMTP mailbox. The authenticated administrator also sees saved enquiries and notification failures.
+- `node --test tests/contact-route.test.cjs` verifies the actual contact handler's reference, private persistence, notification, validation and failure handling with isolated service doubles. It sends no external email.
+- Every page shares the Made in India / AppleInfotech footer credit.

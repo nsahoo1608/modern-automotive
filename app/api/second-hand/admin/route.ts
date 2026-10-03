@@ -1,7 +1,7 @@
 import { isAdmin, records, read, write, sameOrigin, type Listing } from '@/lib/marketplace/store';
 export async function GET() {
  try { if(!await isAdmin()) return Response.json({message:'Administrator sign-in required.'},{status:401});
- return Response.json({listings:await records<Listing>('marketplace/listings/'),enquiries:await records('marketplace/enquiries/'),settings:await read('marketplace/settings.json')},{headers:{'Cache-Control':'private, no-store'}});
+ return Response.json({listings:await records<Listing>('marketplace/listings/'),enquiries:await records('marketplace/enquiries/'),contacts:await records('contact/messages/'),settings:await read('marketplace/settings.json')},{headers:{'Cache-Control':'private, no-store'}});
  } catch {return Response.json({message:'Unable to load administrator data.'},{status:503});}
 }
 export async function PATCH(request: Request) {
