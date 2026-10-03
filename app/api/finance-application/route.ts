@@ -12,7 +12,8 @@ function escapeHtml(value: unknown): string {
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json();
+    const data = await request.json().catch(() => null);
+    if (!data || typeof data !== "object" || Array.isArray(data)) { return NextResponse.json({ success: false, message: "Please provide a valid application." }, { status: 400 }); }
 
     const {
       name,
@@ -23,6 +24,7 @@ export async function POST(request: Request) {
       category,
       brand,
       model,
+      variant,
       condition,
       price,
       loan,
@@ -40,7 +42,7 @@ export async function POST(request: Request) {
       longitude,
     } = data;
 
-    if (!name?.trim() || !mobile || mobile.length !== 10) {
+    if (typeof name !== "string" || !name.trim() || name.length > 150 || typeof mobile !== "string" || !/^[6-9]\d{9}$/.test(mobile)) {
       return NextResponse.json(
         {
           success: false,
@@ -50,6 +52,12 @@ export async function POST(request: Request) {
       );
     }
 
+    if (email && (typeof email !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) {
+      return NextResponse.json({ success: false, message: "Please enter a valid email address." }, { status: 400 });
+    }
+    if (loan && (!Number.isFinite(Number(loan)) || Number(loan) <= 0)) {
+      return NextResponse.json({ success: false, message: "Please enter a valid loan amount." }, { status: 400 });
+    }
     const smtpHost = process.env.SMTP_HOST;
     const smtpPort = Number(process.env.SMTP_PORT || 587);
     const smtpUser = process.env.SMTP_USER;
@@ -122,12 +130,14 @@ export async function POST(request: Request) {
           <p><strong>Vehicle Type:</strong> ${escapeHtml(category || "Not provided")}</p>
           <p><strong>Brand:</strong> ${escapeHtml(brand || "Not provided")}</p>
           <p><strong>Model:</strong> ${escapeHtml(model || "Not provided")}</p>
+          <p><strong>Variant:</strong> ${escapeHtml(variant || "Not provided")}</p>
           <p><strong>Condition:</strong> ${escapeHtml(condition || "Not provided")}</p>
           <p><strong>Vehicle Price:</strong> ${escapeHtml(price || "Not provided")}</p>
           <p><strong>Loan Required:</strong> ${escapeHtml(loan || "Not provided")}</p>
 
           <h3>Location Details</h3>
 
+          <p><strong>City:</strong> ${escapeHtml(city || "Not provided")}</p>
           <p><strong>Address:</strong> ${escapeHtml(address || "Not provided")}</p>
           <p><strong>Village / Locality:</strong> ${escapeHtml(village || "Not provided")}</p>
           <p><strong>Ward:</strong> ${escapeHtml(ward || "Not provided")}</p>

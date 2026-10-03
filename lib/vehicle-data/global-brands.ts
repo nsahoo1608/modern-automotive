@@ -1,0 +1,54 @@
+import type { ManufacturerSource, VehicleType } from "./types";
+
+export type BrandGroup = { name: string; sourceUrl: string; relationship: string; brandIds: string[] };
+// Ownership/portfolio references checked on 3 October 2026. Alliances are not treated as parents.
+export const brandGroups: BrandGroup[] = [
+  { name: "Toyota Motor Corporation", sourceUrl: "https://global.toyota/pages/global_toyota/ir/stock/2026_shareholders_meeting_convocation_en.pdf", relationship: "Group brand", brandIds: ["toyota","lexus","daihatsu"] },
+  { name: "Honda Motor", sourceUrl: "https://www.honda.com/", relationship: "Group company / brand", brandIds: ["honda","honda-two-wheelers","acura"] },
+  { name: "Suzuki Motor Corporation", sourceUrl: "https://www.globalsuzuki.com/corporate/productionbase/abroad.html", relationship: "Group company / brand", brandIds: ["maruti-suzuki","suzuki-motorcycle"] },
+  { name: "Ford Motor Company", sourceUrl: "https://corporate.ford.com/about/brands/", relationship: "Group brand", brandIds: ["ford","lincoln"] },
+  { name: "Hinduja Group", sourceUrl: "https://www.ashokleyland.com/", relationship: "Group company", brandIds: ["ashok-leyland"] },
+  { name: "Mahindra Group", sourceUrl: "https://www.mahindra.com/news-room/press-release/en/swaraj-tractors-achieves-25-lakh-production-milestone", relationship: "Group division", brandIds: ["swaraj"] },
+  { name: "Tata Motors / Hitachi Construction Machinery", sourceUrl: "https://www.tatahitachi.co.in/40-years-of-tata-and-hitachi/", relationship: "Joint venture", brandIds: ["tata-hitachi"] },
+
+  { name: "Volkswagen Group", sourceUrl: "https://www.volkswagen-group.com/en/brands-and-brand-groups-15811", relationship: "Group brand", brandIds: ["volkswagen","skoda","audi","porsche","bentley","lamborghini","seat","cupra","ducati","volkswagen-commercial"] },
+  { name: "Stellantis", sourceUrl: "https://www.stellantis.com/en/brands", relationship: "Group brand", brandIds: ["abarth","alfa-romeo","chrysler","citroen","dodge","ds","fiat","jeep","lancia","maserati","opel","peugeot","ram","vauxhall"] },
+  { name: "BMW Group", sourceUrl: "https://www.bmwgroup.com/en/company/brands-products.html", relationship: "Group brand", brandIds: ["bmw","mini","rolls-royce","bmw-motorrad"] },
+  { name: "Renault Group", sourceUrl: "https://www.renaultgroup.com/en/our-brands/", relationship: "Group brand", brandIds: ["renault","dacia","alpine"] },
+  { name: "General Motors", sourceUrl: "https://www.gm.com/our-brands", relationship: "Group brand", brandIds: ["chevrolet","gmc","buick","cadillac"] },
+  { name: "Geely Holding portfolio", sourceUrl: "https://global.geely.com/en/news/2024/geely-holding-annual-sales-2023", relationship: "Portfolio brand; ownership structure varies", brandIds: ["geely","volvo","polestar","lotus","zeekr","lynk-co","levc","farizon"] },
+  { name: "Tata Group / Tata Motors", sourceUrl: "https://www.tata.com/business/jlr", relationship: "Group company / brand", brandIds: ["tata","jaguar","land-rover"] },
+  { name: "Mahindra Group", sourceUrl: "https://www.mahindra.com/news-room/press-release/en/mahindra-and-mahindra-completes-acquisition-of-58.96-percent-controlling-stake-in-sml-isuzu", relationship: "Group company / brand", brandIds: ["mahindra","sml-isuzu"] },
+  { name: "Volvo Group", sourceUrl: "https://www.volvogroup.com/en/about-us/brands.html", relationship: "Group brand", brandIds: ["volvo-ce","volvo-trucks","volvo-buses","mack","renault-trucks","prevost","nova-bus","rokbak"] },
+  { name: "Volvo Group / Eicher Motors", sourceUrl: "https://www.volvogroup.com/en/about-us/brands.html", relationship: "Joint venture", brandIds: ["eicher"] },
+  { name: "TRATON Group", sourceUrl: "https://traton.com/en/company/brands-and-services.html", relationship: "Group brand", brandIds: ["scania","man","international","volkswagen-truck-bus"] },
+  { name: "Daimler Truck", sourceUrl: "https://www.daimlertruck.com/en/products/trucks", relationship: "Group brand", brandIds: ["bharatbenz","freightliner","western-star","mercedes-trucks"] },
+  { name: "CNH", sourceUrl: "https://www.cnh.com/Our-Company/Our-Brands", relationship: "Group brand", brandIds: ["new-holland","case-ih","case-construction","new-holland-construction","steyr","eurocomach"] },
+  { name: "AGCO", sourceUrl: "https://www.agcocorp.com/us/en/home/brands-and-solutions/tractors.html", relationship: "Group brand", brandIds: ["fendt","massey-ferguson","valtra"] },
+  { name: "Piaggio Group", sourceUrl: "https://www.piaggiogroup.com/en/group/profile", relationship: "Group brand", brandIds: ["piaggio","vespa","aprilia","moto-guzzi","gilera","derbi"] },
+  { name: "BYD", sourceUrl: "https://www.byd.com/us/news-list/BYD-Unleashes-FANG-CHENG-BAO-A-New-Brand-that-Specializes-in-Professional-and-Personalized-Identities.html", relationship: "Group brand", brandIds: ["byd","denza","yangwang","fang-cheng-bao"] },
+  { name: "Hyundai Motor Group", sourceUrl: "https://www.hyundaimotorgroup.com/en/about-us/strategy", relationship: "Group company / brand", brandIds: ["hyundai","kia","genesis"] },
+];
+
+const P: VehicleType = "Passenger Vehicle", C: VehicleType = "Commercial Vehicle", T: VehicleType = "Two Wheeler", A: VehicleType = "Agricultural Equipment", E: VehicleType = "Construction Equipment", B: VehicleType = "Bus";
+const additions: [string,string,string,VehicleType][] = [
+  ["acura","Acura","https://www.acura.com/",P], ["daihatsu","Daihatsu","https://www.daihatsu.com/",P],
+  ["bentley","Bentley","https://www.bentleymotors.com/",P], ["lamborghini","Lamborghini","https://www.lamborghini.com/",P],
+  ["seat","SEAT","https://www.seat.com/",P], ["cupra","CUPRA","https://www.cupraofficial.com/",P], ["ducati","Ducati","https://www.ducati.com/",T], ["volkswagen-commercial","Volkswagen Commercial Vehicles","https://www.volkswagen-commercial-vehicles.com/",C],
+  ["abarth","Abarth","https://www.abarth.com/",P], ["alfa-romeo","Alfa Romeo","https://www.alfaromeo.com/",P], ["chrysler","Chrysler","https://www.chrysler.com/",P], ["dodge","Dodge","https://www.dodge.com/",P], ["ds","DS Automobiles","https://www.dsautomobiles.co.uk/",P], ["fiat","Fiat","https://www.fiat.com/",P], ["lancia","Lancia","https://www.lancia.com/",P], ["maserati","Maserati","https://www.maserati.com/",P], ["opel","Opel","https://www.opel.com/",P], ["peugeot","Peugeot","https://www.peugeot.com/",P], ["ram","Ram","https://www.ramtrucks.com/",C], ["vauxhall","Vauxhall","https://www.vauxhall.co.uk/",P],
+  ["mini","MINI","https://www.mini.com/",P], ["rolls-royce","Rolls-Royce","https://www.rolls-roycemotorcars.com/",P], ["bmw-motorrad","BMW Motorrad","https://www.bmw-motorrad.com/",T],
+  ["dacia","Dacia","https://www.dacia.com/",P], ["alpine","Alpine","https://www.alpinecars.com/",P],
+  ["chevrolet","Chevrolet","https://www.chevrolet.com/",P], ["gmc","GMC","https://www.gmc.com/",C], ["buick","Buick","https://www.buick.com/",P], ["cadillac","Cadillac","https://www.cadillac.com/",P],
+  ["geely","Geely","https://www.geely.com/",P], ["polestar","Polestar","https://www.polestar.com/",P], ["lotus","Lotus","https://www.lotuscars.com/",P], ["zeekr","Zeekr","https://www.zeekrglobal.com/",P], ["lynk-co","Lynk & Co","https://www.lynkco.com/",P], ["levc","LEVC","https://levc.com/",C], ["farizon","Farizon","https://www.farizonauto.com/",C],
+  ["volvo-trucks","Volvo Trucks","https://www.volvotrucks.com/",C], ["volvo-buses","Volvo Buses","https://www.volvobuses.com/",B], ["mack","Mack Trucks","https://www.macktrucks.com/",C], ["renault-trucks","Renault Trucks","https://www.renault-trucks.com/",C], ["prevost","Prevost","https://www.prevostcar.com/",B], ["nova-bus","Nova Bus","https://novabus.com/",B], ["rokbak","Rokbak","https://www.rokbak.com/",E],
+  ["scania","Scania","https://www.scania.com/",C], ["man","MAN","https://www.man.eu/",C], ["international","International","https://www.international.com/",C], ["volkswagen-truck-bus","Volkswagen Truck & Bus","https://www.vwco.com.br/",C],
+  ["freightliner","Freightliner","https://www.freightliner.com/",C], ["western-star","Western Star","https://www.westernstartrucks.com/",C], ["mercedes-trucks","Mercedes-Benz Trucks","https://www.mercedes-benz-trucks.com/",C],
+  ["case-ih","Case IH","https://www.caseih.com/",A], ["case-construction","CASE Construction","https://www.casece.com/",E], ["new-holland-construction","New Holland Construction","https://construction.newholland.com/",E], ["steyr","STEYR","https://www.steyr-traktoren.com/",A], ["eurocomach","Eurocomach","https://eurocomach.com/",E],
+  ["fendt","Fendt","https://www.fendt.com/",A], ["massey-ferguson","Massey Ferguson","https://www.masseyferguson.com/",A], ["valtra","Valtra","https://www.valtra.com/",A],
+  ["vespa","Vespa","https://www.vespa.com/",T], ["aprilia","Aprilia","https://www.aprilia.com/",T], ["moto-guzzi","Moto Guzzi","https://www.motoguzzi.com/",T], ["gilera","Gilera","https://www.gilera.com/",T], ["derbi","Derbi","https://www.derbi.com/",T],
+  ["denza","Denza","https://www.denza.com/",P], ["yangwang","Yangwang","https://www.yangwangauto.com/",P], ["fang-cheng-bao","Fang Cheng Bao","https://www.fangchengbao.com/",P], ["genesis","Genesis","https://www.genesis.com/",P],
+  ["ford","Ford","https://www.ford.com/",P], ["lincoln","Lincoln","https://www.lincoln.com/",P], ["tesla","Tesla","https://www.tesla.com/",P], ["rivian","Rivian","https://rivian.com/",P], ["lucid","Lucid","https://lucidmotors.com/",P], ["nio","NIO","https://www.nio.com/",P], ["xpeng","XPENG","https://www.xpeng.com/",P], ["subaru","Subaru","https://www.subaru-global.com/",P], ["mazda","Mazda","https://www.mazda.com/",P], ["mitsubishi","Mitsubishi Motors","https://www.mitsubishi-motors.com/",P], ["ferrari","Ferrari","https://www.ferrari.com/",P], ["aston-martin","Aston Martin","https://www.astonmartin.com/",P], ["mclaren","McLaren","https://cars.mclaren.com/",P], ["bugatti","Bugatti","https://www.bugatti.com/",P], ["koenigsegg","Koenigsegg","https://www.koenigsegg.com/",P], ["pagani","Pagani","https://www.pagani.com/",P],
+  ["kawasaki","Kawasaki","https://www.kawasaki.com/",T], ["triumph","Triumph","https://www.triumphmotorcycles.com/",T], ["harley-davidson","Harley-Davidson","https://www.harley-davidson.com/",T], ["caterpillar","Caterpillar","https://www.cat.com/",E], ["liebherr","Liebherr","https://www.liebherr.com/",E], ["kobelco","Kobelco","https://www.kobelcocm-global.com/",E], ["hitachi-construction","Hitachi Construction Machinery","https://www.hitachicm.com/",E], ["xcmg","XCMG","https://www.xcmg.com/",E], ["liu-gong","LiuGong","https://www.liugong.com/",E],
+];
+export const additionalBrandCategories = Object.fromEntries(additions.map(([id,,,category]) => [id, category])) as Record<string,VehicleType>;
+export const additionalManufacturerSources: ManufacturerSource[] = additions.map(([id,name,officialUrl]) => ({ id,name,officialUrl,vehicleUrl:officialUrl }));

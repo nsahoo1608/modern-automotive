@@ -1,4 +1,5 @@
 ﻿import { NextResponse } from "next/server";
+import type { VehicleBrand, VehicleModel, VehicleManufacturer } from "@/lib/vehicle-data/types";
 
 import { manufacturerAdapters } from "@/lib/vehicle-data/adapters";
 import { manufacturerSources } from "@/lib/vehicle-data/manufacturers";
@@ -18,26 +19,26 @@ const HONDA_DETAILED_URLS: Record<string, string> = {
 };
 
 export async function GET() {
-  const results = [];
+  const results: (Partial<VehicleManufacturer> & { id: string; name: string; brands: VehicleBrand[]; dataStatus: string; vehicleUrl?: string; priceUrl?: string; dealerLocatorUrl?: string })[] = [];
   const errors: Record<string, string> = {};
 
-  for (const manufacturer of manufacturerSources) {
+  await Promise.all(manufacturerSources.map(async (manufacturer) => {
     const adapter = manufacturerAdapters[manufacturer.id];
 
-    if (!adapter) {
+    if (!adapter || manufacturer.id === "honda") {
       if (manufacturer.id === "honda" && manufacturer.priceUrl) {
         try {
           const landing = await syncOfficialVehicle({
             manufacturerId: "honda",
             url: manufacturer.priceUrl,
             category: "Passenger Vehicle",
-            timeoutMs: 30000,
+            timeoutMs: 10000,
           });
 
           if (landing.success && landing.catalog?.vehicles.length) {
-            const models = [];
+            const models: VehicleModel[] = [];
 
-            for (const landingVehicle of landing.catalog.vehicles) {
+            await Promise.all(landing.catalog.vehicles.map(async (landingVehicle) => {
               const landingModel = landingVehicle.model;
 
               const detailedUrl =
@@ -55,7 +56,7 @@ export async function GET() {
                     manufacturerId: "honda",
                     url: detailedUrl,
                     category: "Passenger Vehicle",
-                    timeoutMs: 30000,
+                    timeoutMs: 10000,
                   });
 
                   if (
@@ -102,7 +103,7 @@ export async function GET() {
               }
 
               models.push(finalModel);
-            }
+            }));
 
             results.push({
               id: manufacturer.id,
@@ -123,7 +124,7 @@ export async function GET() {
               dataStatus: "official-sync",
             });
 
-            continue;
+            return;
           }
         } catch (error) {
           errors[manufacturer.id] =
@@ -141,10 +142,10 @@ export async function GET() {
         priceUrl: manufacturer.priceUrl,
         dealerLocatorUrl: manufacturer.dealerLocatorUrl,
         brands: [],
-        dataStatus: "adapter-pending",
+        dataStatus: "official-directory",
       });
 
-      continue;
+      return;
     }
 
     try {
@@ -152,7 +153,7 @@ export async function GET() {
 
       results.push({
         ...catalog,
-        dataStatus: "live",
+        dataStatus: adapter.mode ?? "catalogue",
       });
     } catch (error) {
       errors[manufacturer.id] =
@@ -171,8 +172,9 @@ export async function GET() {
         dataStatus: "error",
       });
     }
-  }
+  }));
 
+  results.sort((a, b) => manufacturerSources.findIndex(item => item.id === a.id) - manufacturerSources.findIndex(item => item.id === b.id));
   return NextResponse.json({
     success: Object.keys(errors).length === 0,
     sourcePolicy: {

@@ -1,6 +1,8 @@
-﻿import type { ManufacturerSource } from "./types";
+﻿import { additionalManufacturerSources } from "./global-brands";
+import type { ManufacturerSource } from "./types";
 
 export const manufacturerSources: ManufacturerSource[] = [
+  ...additionalManufacturerSources,
   // ---------------------------------------------------------------------------
   // COMMERCIAL VEHICLES / BUSES / CHASSIS
   // ---------------------------------------------------------------------------

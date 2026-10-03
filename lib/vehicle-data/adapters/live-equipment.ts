@@ -60,6 +60,7 @@ export async function fetchLiveEquipmentCatalog(
 ): Promise<VehicleManufacturer> {
   const response = await fetch(source.productUrl, {
     cache: "no-store",
+    signal: AbortSignal.timeout(10000),
     headers: {
       "User-Agent": "ModernAutomotive/1.0",
       Accept: "text/html,application/xhtml+xml",

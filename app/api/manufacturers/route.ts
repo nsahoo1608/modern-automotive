@@ -1,4 +1,5 @@
 ﻿import { NextResponse } from "next/server";
+import { brandDirectory } from "@/lib/vehicle-data/brand-directory";
 import { manufacturerSources } from "@/lib/vehicle-data/manufacturers";
 
 export async function GET() {
@@ -11,6 +12,7 @@ export async function GET() {
       showroom: "authorized-dealer",
     },
     fetchedAt: new Date().toISOString(),
-    manufacturers: manufacturerSources,
+    manufacturers: manufacturerSources.map(source => ({ ...source, directory: brandDirectory.find(brand => brand.id === source.id) })),
+    brandCount: brandDirectory.length,
   });
 }

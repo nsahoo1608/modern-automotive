@@ -1,4 +1,6 @@
-﻿import type { ManufacturerAdapter } from "./utils";
+﻿import { manufacturerSources } from "../manufacturers";
+import { createOfficialDirectoryAdapter } from "./official-directory";
+import type { ManufacturerAdapter } from "./utils";
 
 import { fetchAshokLeylandCatalog } from "./ashok-leyland";
 import { fetchBharatBenzCatalog } from "./bharatbenz";
@@ -15,7 +17,7 @@ import { fetchSANYCatalog } from "./sany";
 
 export const manufacturerAdapters: Record<
   string,
-  ManufacturerAdapter
+  ManufacturerAdapter & { mode?: "official-directory" }
 > = {
   tata: {
     manufacturerId: "tata",
@@ -76,3 +78,5 @@ export const manufacturerAdapters: Record<
     fetchCatalog: fetchSANYCatalog,
   },
 };
+
+for (const source of manufacturerSources) { if (!manufacturerAdapters[source.id]) manufacturerAdapters[source.id] = createOfficialDirectoryAdapter(source); }
