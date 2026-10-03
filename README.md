@@ -28,3 +28,13 @@ Group, parent-company and joint-venture evidence links are stored beside each re
 ## Saving and publishing
 
 The GitHub repository `nsahoo1608/modern-automotive` is linked to Vercel project `rashmiranjan-fin`. Commits pushed to the production branch trigger Vercel deployments through that integration. GitHub Actions also builds pushes and pull requests. Local file edits still need to be committed and pushed; the website does not automatically upload arbitrary local edits or credentials.
+
+## Second-hand marketplace
+
+- `/second-hand` shows administrator-approved listings; `/second-hand/sell` accepts seller details and 1–8 photographs.
+- A private Vercel Blob store holds listings, processed photos, buyer enquiries and administrator sessions. Set `BLOB_READ_WRITE_TOKEN` through the linked project storage connection. Never expose this variable to the client.
+- Public responses explicitly include vehicle details, city/district and photo routes. Seller contact details and exact address are stored separately and returned only by the authenticated administrator endpoint. Photos have metadata removed and require privacy review before publication.
+- `/second-hand/admin` sends a ten-minute, one-time code to the existing `MAIL_TO` administrator mailbox. Sign-in creates an eight-hour HttpOnly session. There is no public administrator registration. SMTP variables must be configured.
+- The administrator approves or hides listings, marks vehicles reserved/sold, sets an optional RRFIN offer price and edits the monthly promotion banner. Reduced-motion visitors see a static banner.
+- Buyers can submit a price offer, request an inspection or discuss finance. Enquiries are private to the administrator. Payments and ownership transfer are currently coordinated outside checkout; no payment gateway or escrow is connected.
+- Initial marketplace verification covered submission, moderation, private photographs, public field filtering, authenticated administration, buyer offers and sold-state rejection using disposable fictitious records. Production build and targeted lint passed.

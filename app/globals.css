@@ -264,3 +264,58 @@ body { font-family: var(--font-geist-sans), Arial, sans-serif; background: #0b11
 @media(max-width:800px) { .directory-hero { grid-template-columns: 1fr; gap: 25px; }.directory-hero img { height: 220px; }.cinematic-hero { min-height: 400px; }.application-visual img { height: 180px; } }
 @media(max-width:520px) { .cinematic-hero { min-height: 350px; }.category-card { padding: 0; }.category-card-content { padding: 25px; }.marquee-heading { align-items: start; }.marquee-heading > span { width: 100%; }.process-photo { height: 180px; } }
 @media(prefers-reduced-motion:reduce) { .marquee-window { overflow-x: auto; }.marquee-track { animation: none; }.hero-photo { transition: none; } }
+/* Fluid desktop layouts with comfortable mobile gutters. */
+body > main { width: 100%; min-width: 0; }
+.container, .header-inner { width: 100%; max-width: none; padding-inline: clamp(20px, 3vw, 64px); }
+.catalogue-shell { padding-inline: clamp(20px, 3vw, 64px); }
+.application-page > section { max-width: none; padding-inline: clamp(20px, 3vw, 64px) !important; }
+.original-logo { width: 64px; height: 64px; object-fit: contain; border-radius: 50%; flex-shrink: 0; }
+.footer-logo { width: 80px; height: 80px; margin-bottom: 15px; }
+.selection-details { grid-column: 1 / -1; min-width: 0; padding: clamp(18px, 3vw, 30px); background: #0b1511; border: 1px solid #365347; border-radius: 16px; }
+.selection-heading { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.selection-heading h3 { font-size: 28px; margin: 12px 0; }
+.selection-details p { color: #a8b5b0; font-size: 13px; line-height: 1.7; }
+.selection-photo { background: #eef2f0; border-radius: 12px; overflow: hidden; margin-top: 20px; }
+.selection-photo img { width: 100%; height: clamp(220px, 30vw, 460px); object-fit: contain; }
+.selection-gallery { display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; }
+.selection-gallery button { flex-shrink: 0; border: 2px solid transparent; border-radius: 8px; background: #edf2ef; overflow: hidden; cursor: pointer; }
+.selection-gallery button[aria-pressed="true"] { border-color: #18b878; }
+.selection-gallery img { width: 100px; height: 70px; object-fit: contain; }
+.selection-links { display: flex; gap: 10px; flex-wrap: wrap; margin: 18px 0; }
+.selection-links a { color: #8ee7bc; padding: 10px 14px; border: 1px solid #365347; border-radius: 8px; font-size: 13px; }
+.selection-specs { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,220px),1fr)); gap: 0 24px; }
+.selection-specs > div { padding: 14px 0; border-bottom: 1px solid #263c31; }
+.selection-specs dt { color: #9cb3a6; font-size: 12px; text-transform: capitalize; }
+.selection-specs dd { margin: 5px 0 0; font-size: 14px; overflow-wrap: anywhere; }
+@media(max-width:520px) { .original-logo { width: 48px; height: 48px; } }
+.marketplace-page { padding-bottom: 70px; }
+.marketplace-page h2 { margin: 28px 0 20px; }
+.monthly-offer { display:flex; gap:18px; align-items:center; flex-wrap:wrap; background:#203b2b; border:1px solid #67d9ac; padding:18px 24px; border-radius:12px; margin-bottom:30px; }
+.monthly-offer > span { color:#a3e8c5; font-size:11px; letter-spacing:.12em; }
+.monthly-offer strong { animation: monthlyOfferPulse 1.8s ease-in-out infinite; font-size:15px; }
+@keyframes monthlyOfferPulse { 0%,100% { opacity:1; } 50% { opacity:.4; } }
+.marketplace-hero, .used-home-promo { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center; gap:50px; }
+.marketplace-hero img, .used-home-promo img { width:100%; height:420px; object-fit:cover; border-radius:18px; }
+.marketplace-trust { display:flex; gap:30px; flex-wrap:wrap; padding:25px 0; margin-bottom:30px; color:#8fd5b0; font-size:13px; }
+.marketplace-empty { border:1px solid #365347; border-radius:16px; padding:clamp(25px,5vw,70px); text-align:center; margin:25px 0; }
+.listing-status { display:inline-block; text-transform:capitalize; font-size:12px; color:#8ee7bc; padding:7px 12px; background:#193524; border-radius:20px; margin:10px 0; }
+.marketplace-form { min-width:0; padding:clamp(20px,3vw,40px); border:1px solid #365347; border-radius:16px; background:#111e18; margin:25px 0; }
+.marketplace-fields { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr)); gap:20px; }
+.marketplace-form label { display:grid; gap:9px; margin:15px 0; font-size:13px; color:#dcebe1; }
+.marketplace-form input, .marketplace-form select, .marketplace-form textarea { width:100%; min-width:0; border:1px solid #365347; background:#09140e; color:#f2f5f3; border-radius:9px; padding:13px; font:inherit; }
+.marketplace-form .consent-label { display:flex; align-items:flex-start; gap:12px; line-height:1.6; }
+.marketplace-form input[type=checkbox] { width:18px; height:18px; flex-shrink:0; margin-top:3px; }
+.upload-previews { display:flex; gap:15px; flex-wrap:wrap; margin-top:20px; }
+.upload-previews img { width:240px; max-width:100%; height:160px; object-fit:contain; background:#e8efea; border-radius:9px; }
+.upload-previews button { display:block; color:#a3e8c5; padding:8px 0; cursor:pointer; }
+.used-detail-layout { display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); gap:35px; align-items:start; }
+.used-price { display:block; font-size:36px; color:#b3edcd; margin:10px 0; }
+.our-offer-box { padding:20px; border:1px solid #6b9b80; border-radius:12px; background:#1c3526; margin:25px 0; display:grid; gap:10px; }
+.our-offer-box strong { font-size:25px; }.our-offer-box small { color:#a8b5b0; line-height:1.6; }
+.customer-offer-box { border:1px solid #67d9ac; border-radius:12px; padding:16px; }
+.private-information { background:#242e28; border:1px dashed #7c9f88; border-radius:10px; padding:20px; margin:20px 0; overflow-wrap:anywhere; }
+.admin-login { max-width:600px; }.admin-login button { margin:10px 10px 0 0; }
+.admin-listings { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,500px),1fr)); gap:25px; }.admin-listings article { margin:0; }
+@media(max-width:1050px) { .main-navigation { gap:12px; font-size:11px; }.used-detail-layout { grid-template-columns:1fr; } }
+@media(max-width:800px) { .marketplace-hero,.used-home-promo { grid-template-columns:1fr; gap:25px; }.marketplace-hero img,.used-home-promo img { height:260px; } }
+@media(prefers-reduced-motion:reduce) { .monthly-offer strong { animation:none; } }

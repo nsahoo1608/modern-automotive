@@ -1,9 +1,10 @@
-﻿"use client";
+"use client";
 
 import type { VehicleBrand, VehicleManufacturer, VehicleModel } from "@/lib/vehicle-data/types";
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import VehicleSelectionDetails from "./VehicleSelectionDetails";
 import { brandDirectory } from "@/lib/vehicle-data/brand-directory";
 import { vehicleCategoryNames } from "@/lib/vehicle-data/categories";
 
@@ -208,7 +209,7 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
   };
 
   return (
-    <main
+    <main className="application-page"
       style={{
         minHeight: "100vh",
         background: "#0B1110",
@@ -220,7 +221,7 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
       {/* HERO */}
       <section
         style={{
-          maxWidth: 1100,
+          maxWidth: "none",
           margin: "0 auto",
           padding: "70px 24px 40px",
         }}
@@ -271,7 +272,7 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
       {/* APPLICATION */}
       <section
         style={{
-          maxWidth: 1100,
+          maxWidth: "none",
           margin: "0 auto",
           padding: "20px 24px 80px",
         }}
@@ -622,40 +623,7 @@ export default function ApplyForm({ initialCategory, initialBrand, initialModel 
               </select>
             </label>
 
-            {selectedModelData && selectedModelData.images && selectedModelData.images.length > 0 && (
-  <div
-    style={{
-      marginTop: 16,
-      padding: 16,
-      border: "1px solid #30413A",
-      borderRadius: 16,
-      background: "#121C19",
-    }}
-  >
-    <Image width={600} height={280} unoptimized
-      src={selectedModelData.images[0].url}
-      alt={selectedModelData.images[0].alt || selectedModelData.name}
-      style={{
-        width: "100%",
-        maxHeight: 280,
-        objectFit: "contain",
-        borderRadius: 12,
-      }}
-    />
-
-    <div
-      style={{
-        marginTop: 10,
-        color: "#F2F5F3",
-        fontWeight: 600,
-        fontSize: 16,
-      }}
-    >
-      {selectedModelData.name}
-    </div>
-  </div>
-)}
-
+            <VehicleSelectionDetails key={`${selectedBrand}-${selectedModel}-${selectedVariant}`} name={selectedBrand} brand={selectedBrandData} model={selectedModelData} variant={selectedVariantData} />
             {/* VARIANT */}
             {selectedModelData && availableVariants.length > 0 && (
               <label style={{ display: "grid", gap: 8 }}>
