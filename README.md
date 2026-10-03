@@ -17,7 +17,7 @@ Run `npm ci`, then `npm run dev`. Use `npm run build` and `npm run start` to che
 
 ## Production configuration
 
-The finance application uses `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `MAIL_FROM`, and `MAIL_TO`. The address service uses `GOOGLE_MAPS_API_KEY`. Store credentials only in local environment files or encrypted hosting environment variables. Never commit them.
+The finance application uses `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, `MAIL_FROM`, and `MAIL_TO`. Optional address lookup uses OpenStreetMap Nominatim and has a manual address-entry fallback; it does not require a Google Maps key. The local database URL is a placeholder and database persistence is not enabled. Store credentials only in local environment files or encrypted hosting environment variables. Never commit them.
 
 ## Brands and source coverage
 
